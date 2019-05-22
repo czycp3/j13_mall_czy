@@ -1,7 +1,6 @@
 package com.cskaoyan.mall_springboot.mapper;
 
 import com.cskaoyan.mall_springboot.bean.Admin;
-import com.cskaoyan.mall_springboot.bean.BaseQueryVo;
 import org.apache.ibatis.annotations.Param;
 
 /**

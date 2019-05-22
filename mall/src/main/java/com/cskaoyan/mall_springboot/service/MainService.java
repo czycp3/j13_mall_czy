@@ -1,6 +1,6 @@
 package com.cskaoyan.mall_springboot.service;
 
-import com.cskaoyan.mall_springboot.bean.BaseQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 
 
 /**

@@ -43,4 +43,6 @@ public interface AdMapper {
      * @return List<Ad>
      */
     List<Ad> queryAllAdByPage(int limit, int offset);
+
+
 }
