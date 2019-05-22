@@ -9,6 +9,7 @@ out
 **/target
 **/test
 *.properties
+!.mvn/wrapper/maven-wrapper.jar
 
   
 # Compiled class file
