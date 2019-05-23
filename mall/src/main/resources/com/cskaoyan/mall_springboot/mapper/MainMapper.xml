@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.MainMapper">
+
+    <select id="queryGoodsTotal" resultType="java.lang.Integer">
+        select count(*) from cskaoyan_mall_goods
+    </select>
+    <select id="queryOrderTotal" resultType="java.lang.Integer">
+        select count(*) from cskaoyan_mall_order
+    </select>
+    <select id="queryProductTotal" resultType="java.lang.Integer">
+        select count(*) from cskaoyan_mall_goods_product
+    </select>
+    <select id="queryUserTotal" resultType="java.lang.Integer">
+        select count(*) from cskaoyan_mall_user
+    </select>
+    <select id="queryAdmin" resultType="com.cskaoyan.mall_springboot.bean.Admin">
+        select username,password,avatar from cskaoyan_mall_admin
+        where username = #{admin.username} and password = #{admin.password}
+    </select>
+
+</mapper>
