@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author CZY-Y7000P
+ * @author cly
  */
 @Controller
 public class UserController {
@@ -20,13 +20,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/login")
-    public String login(User user, Model model){
-        boolean login = userService.login(user);
-        if(login){
-            model.addAttribute("user",user);
-            return "hello";
-        }
+    @RequestMapping("/user/list")
+    public String list(User user, Model model){
+
         return "index.html";
     }
 }
