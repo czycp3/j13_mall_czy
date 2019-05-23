@@ -1,4 +1,4 @@
-package com.cskaoyan.mall_springboot.bean;
+package com.cskaoyan.mall_springboot.bean.resultvo;
 
 
 /**

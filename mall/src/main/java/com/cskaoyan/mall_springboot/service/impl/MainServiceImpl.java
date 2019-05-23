@@ -1,15 +1,11 @@
 package com.cskaoyan.mall_springboot.service.impl;
 
-import com.cskaoyan.mall_springboot.bean.Admin;
-import com.cskaoyan.mall_springboot.bean.BaseQueryVo;
-import com.cskaoyan.mall_springboot.bean.ResultVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
 import com.cskaoyan.mall_springboot.mapper.MainMapper;
 import com.cskaoyan.mall_springboot.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author CZY-Y7000P

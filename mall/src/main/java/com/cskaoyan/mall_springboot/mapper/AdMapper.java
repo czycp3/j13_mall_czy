@@ -38,9 +38,14 @@ public interface AdMapper {
 
     /**
      * 分页查询广告
-     * @param limit
-     * @param offset
+     * @param limit 每页数量
+     * @param offset 偏移量
+     * @param sort 排序字段
+     * @param order 排序方式
      * @return List<Ad>
      */
-    List<Ad> queryAllAdByPage(int limit, int offset);
+    List<Ad> queryAllAdByPage(@Param("limit") int limit, @Param("offset") int offset,
+                              @Param("sort") String sort,@Param("order") String order);
+
+
 }
