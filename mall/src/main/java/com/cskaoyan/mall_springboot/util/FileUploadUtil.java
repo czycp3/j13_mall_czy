@@ -20,18 +20,14 @@ public class FileUploadUtil {
 
         String contextPath = req.getContextPath();
 
-        // 将文件夹打散
-        int i = fileName.hashCode();
-        String hexString = Integer.toHexString(i);
-        char[] chars = hexString.toCharArray();
         String uuid = UuidGenerator.uuid();
         //取十六进制HashCode的前两位作为文件夹路径
-        fileName = chars[0] + "/" + chars[1] + "/" + uuid + fileName;
+        fileName = uuid + fileName;
         imageInfo.setKey(fileName);
-        imageInfo.setUrl("http://localhost:8080/admin/storage/fetch/" + fileName);
+        imageInfo.setUrl("http://localhost/admin/storage/fetch/" + fileName);
 
-        String path = req.getServletContext().getRealPath("/upload/image");
-        File uploadFile = new File(path + fileName);
+        //String path = req.getServletContext().getRealPath("/upload/image");
+        File uploadFile = new File("/upload/image/" + fileName);
 
         if (!uploadFile.getParentFile().exists()) {
             uploadFile.getParentFile().mkdirs();

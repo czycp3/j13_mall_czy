@@ -214,6 +214,9 @@
   <select id="queryAllAdByPage" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from cskaoyan_mall_ad
+    where deleted != 1
+    order by #{sort} #{order}
+    limit #{limit} offset #{offset}
   </select>
 
   <update id="updateByExampleSelective" parameterType="map">

@@ -45,7 +45,7 @@ public class AdServiceImpl implements AdService {
         //查询custom总记录数
         int total = adMapper.selectCountAd();
         int offset = (page - 1) * limit;
-        List<Ad> adList =  adMapper.queryAllAdByPage(limit,offset);
+        List<Ad> adList =  adMapper.queryAllAdByPage(limit,offset,sort,order);
 
         resultVo.setItems(adList);
         resultVo.setTotal(total);
@@ -87,8 +87,10 @@ public class AdServiceImpl implements AdService {
     @Override
     public SingleQueryVo deleteAd(Ad ad) {
         SingleQueryVo<Ad> singleQueryVo = new SingleQueryVo<>();
+
         try {
-            int ret = adMapper.deleteByPrimaryKey(ad.getId());
+            ad.setDeleted(1);
+            int ret = adMapper.updateByPrimaryKeySelective(ad);
             if(ret == 1) {
                 singleQueryVo.setErrmsg("成功");
                 singleQueryVo.setErrno(0);
