@@ -17,9 +17,11 @@ public interface AdService {
      * @param limit
      * @param sort
      * @param order
+     * @param name
+     * @param content
      * @return BaseQueryVo
      */
-    BaseQueryVo queryAllAdByPage(int page, int limit, String sort, String order);
+    BaseQueryVo queryAllAdByPage(int page, int limit, String sort, String order,String name,String content);
 
     /**
      * 更新广告信息
