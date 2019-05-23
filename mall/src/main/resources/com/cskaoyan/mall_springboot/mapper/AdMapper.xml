@@ -149,12 +149,12 @@
       <if test="enabled != null">
         enabled,
       </if>
-      <if test="addTime != null">
+
         add_time,
-      </if>
-      <if test="updateTime != null">
+
+
         update_time,
-      </if>
+
       <if test="deleted != null">
         deleted,
       </if>
@@ -187,12 +187,12 @@
       <if test="enabled != null">
         #{enabled,jdbcType=BIT},
       </if>
-      <if test="addTime != null">
-        #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+
+        now(),
+
+
+        now(),
+
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
       </if>
@@ -269,9 +269,7 @@
       <if test="record.addTime != null">
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
@@ -328,9 +326,7 @@
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>

@@ -17,20 +17,21 @@ import java.sql.SQLException;
 public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int j = 0; j < strings.length; j++) {
-            while (j==strings.length-1){
-                buffer.append(strings[j]);
+            while (j == strings.length - 1) {
+                sb.append(strings[j]);
             }
-            buffer.append(j).append(",");
+            sb.append(j).append(",");
         }
-        preparedStatement.setString(i,buffer.toString());
+        preparedStatement.setString(i, sb.toString());
     }
+
     /**
-     *@Param  resultSet 查询结果
-     *@Param  columnLabel 列名
-     *@Return  String[]  返回类型为String[]数组
-     *@OtherMsg 查询结果为以逗号","形式分隔的String字符串,返回String[]数组
+     * @Param resultSet 查询结果
+     * @Param columnLabel 列名
+     * @Return String[]  返回类型为String[]数组
+     * @OtherMsg 查询结果为以逗号","形式分隔的String字符串,返回String[]数组
      */
     @Override
     public String[] getNullableResult(ResultSet resultSet, String columnLabel) throws SQLException {
