@@ -1,11 +1,13 @@
 package com.cskaoyan.mall_springboot.controller;
 
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 import com.cskaoyan.mall_springboot.bean.topic.Topic;
 import com.cskaoyan.mall_springboot.service.TopicService;
 import com.cskaoyan.mall_springboot.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,5 +28,11 @@ public class TopicController {
     @ResponseBody
     public BaseQueryVo list(PageUtil pu, Topic topic){
         return topicService.queryAllTopicByPage(pu,topic);
+    }
+
+    @RequestMapping("/topic/update")
+    @ResponseBody
+    public SingleQueryVo update(@RequestBody Topic topic){
+        return topicService.updateTopic(topic);
     }
 }

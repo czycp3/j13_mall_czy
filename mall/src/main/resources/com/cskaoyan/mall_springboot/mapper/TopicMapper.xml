@@ -2,22 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mall_springboot.mapper.TopicMapper">
     <resultMap id="BaseResultMap" type="com.cskaoyan.mall_springboot.bean.topic.Topic">
-        <id column="id" jdbcType="INTEGER" property="id" />
-        <result column="title"  property="title" />
-        <result column="subtitle"  property="subtitle" />
-        <result column="content"  property="content" />
-        <result column="price"  property="price" />
-        <result column="read_count"  property="readCount" />
-        <result column="pic_url"  property="picUrl" />
-        <result column="sort_order"  property="sortOrder" />
-        <result column="goods"  property="goods" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
-        <result column="add_time"  property="addTime" />
-        <result column="update_time"  property="updateTime" />
-        <result column="deleted"  property="deleted" />
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" property="title"/>
+        <result column="subtitle" property="subtitle"/>
+        <result column="content" property="content"/>
+        <result column="price" property="price"/>
+        <result column="read_count" property="readCount"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="sort_order" property="sortOrder"/>
+        <result column="goods" property="goods" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
     <sql id="Base_Column_List">
       id,title,subtitle,content,price,read_count,pic_url,sort_order,goods,add_time,update_time,deleted
     </sql>
+
+    <!--更新topic-->
+    <update id="updateByPrimaryKeySelective">
+        update cskaoyan_mall_topic
+        <set>
+            title = #{title},
+            subtitle = #{subtitle},
+            content = #{content},
+            price = #{price},
+            read_count = #{readCount},
+            pic_url = #{picUrl},
+            sort_order = #{sortOrder},
+            goods = #{goods,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
+            add_time = #{addTime},
+            update_time = #{updateTime},
+            deleted = #{deleted}
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
     <select id="selectCountTopic" resultType="java.lang.Integer">
         select count(*) from cskaoyan_mall_topic
@@ -33,7 +52,8 @@
     </select>
 
     <select id="queryAllTopicByPage" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from cskaoyan_mall_topic
         <where>
             deleted != 1
@@ -47,4 +67,13 @@
         order by #{pu.sort} #{pu.order}
         limit #{pu.limit} offset #{pu.offset}
     </select>
+
+    <!--按主键查询topic-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_topic
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
 </mapper>

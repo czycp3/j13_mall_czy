@@ -25,4 +25,17 @@ public interface TopicMapper {
      */
     List<Topic> queryAllTopicByPage(@Param("pu") PageUtil pu, @Param("topic") Topic topic);
 
+    /**
+     * 更新topic
+     * @param topic
+     * @return 成功行数
+     */
+    int updateByPrimaryKeySelective(Topic topic);
+
+    /**
+     * 按主键查询topic
+     * @param id
+     * @return Topic
+     */
+    Topic selectByPrimaryKey(int id);
 }

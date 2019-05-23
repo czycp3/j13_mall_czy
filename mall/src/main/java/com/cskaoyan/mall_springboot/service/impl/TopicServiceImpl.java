@@ -2,6 +2,7 @@ package com.cskaoyan.mall_springboot.service.impl;
 
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 import com.cskaoyan.mall_springboot.bean.topic.Topic;
 import com.cskaoyan.mall_springboot.mapper.TopicMapper;
 import com.cskaoyan.mall_springboot.service.TopicService;
@@ -24,6 +25,12 @@ public class TopicServiceImpl implements TopicService {
         this.topicMapper = topicMapper;
     }
 
+    /**
+     * 分页查询专题
+     * @param pu
+     * @param topic
+     * @return BaseQueryVo
+     */
     @Override
     public BaseQueryVo queryAllTopicByPage(PageUtil pu, Topic topic) {
         BaseQueryVo baseQueryVo = new BaseQueryVo();
@@ -51,5 +58,28 @@ public class TopicServiceImpl implements TopicService {
 
         baseQueryVo.setData(resultVo);
         return baseQueryVo;
+    }
+
+    /**
+     * 更新专题
+     * @param topic
+     * @return SingleQueryVo
+     */
+    @Override
+    public SingleQueryVo updateTopic(Topic topic) {
+        SingleQueryVo<Topic> singleQueryVo = new SingleQueryVo<>();
+        try {
+            int ret =  topicMapper.updateByPrimaryKeySelective(topic);
+            if(ret != 0){
+                Topic topic1 = topicMapper.selectByPrimaryKey(topic.getId());
+                singleQueryVo.setData(topic1);
+                singleQueryVo.setErrmsg("成功");
+                singleQueryVo.setErrno(0);
+            }
+        }catch (Exception e){
+            singleQueryVo.setErrmsg("更新失败");
+            throw new RuntimeException(e);
+        }
+        return singleQueryVo;
     }
 }
