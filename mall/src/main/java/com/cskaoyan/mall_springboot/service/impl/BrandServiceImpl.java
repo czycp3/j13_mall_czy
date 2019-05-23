@@ -23,7 +23,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public BaseQueryVo<Brand> SelectBrandByPageIdName(MallPageHelper mallPageHelper) {
         //查询Brand
-        Integer integer = brandMapper.SelectBrandCount();
+        Integer integer = brandMapper.SelectBrandCount(mallPageHelper);
         int offset = mallPageHelper.getOffset();
         ArrayList<Brand> brands = brandMapper.SelectBrandByPageIdName(mallPageHelper, offset);
         brandResultVo.setItems(brands);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @Mapper
 public interface BrandMapper {
-    Integer SelectBrandCount ();
+    Integer SelectBrandCount (@Param("mallPageHelper") MallPageHelper mallPageHelper);
 
     ArrayList<Brand> SelectBrandByPageIdName(@Param("mallPageHelper") MallPageHelper mallPageHelper, @Param("offset") Integer offset);
 

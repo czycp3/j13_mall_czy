@@ -15,10 +15,22 @@
     <sql id="Base_Column_List">
     id, `name`, `desc`, pic_url, sort_order, floor_price, add_time, update_time, deleted
   </sql>
-    <select id="SelectBrandCount" resultType="int">
+    <select id="SelectBrandCount" parameterType="com.cskaoyan.mall_springboot.bean.PageHelper" resultType="int">
         select
         count(*)
         from cskaoyan_mall_brand
+        <where>
+            <if test="mallPageHelper.id!=null">
+                <if test="mallPageHelper.id!=''">
+                    id=#{mallPageHelper.id}
+                </if>
+            </if>
+            <if test="mallPageHelper.name!=null">
+                <if test="mallPageHelper.name!=''">
+                    and `name` LIKE CONCAT('%',#{mallPageHelper.name},'%')
+                </if>
+            </if>
+        </where>
     </select>
     <select id="SelectBrandByPageIdName" parameterType="com.cskaoyan.mall_springboot.bean.PageHelper" resultMap="BaseResultMap">
         select
