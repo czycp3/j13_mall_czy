@@ -1,7 +1,7 @@
 package com.cskaoyan.mall_springboot.controller;
 
-import com.cskaoyan.mall_springboot.bean.Admin;
-import com.cskaoyan.mall_springboot.service.LoginService;
+//import com.cskaoyan.mall_springboot.bean.Admin;
+//import com.cskaoyan.mall_springboot.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +20,8 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
-    @Autowired
-    LoginService loginService;
+//    @Autowired
+//    LoginService loginService;
 
 
 
