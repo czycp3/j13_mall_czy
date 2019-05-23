@@ -26,16 +26,6 @@ public class Goods {
     Boolean deleted;
     //商品宣传图片列表
     String[] gallery;
-    String gallerys;
-
-    public String getGallerys() {
-        return gallerys;
-    }
-
-    public void setGallerys(String gallerys) {
-        this.gallerys = gallerys;
-    }
-
     //商品编号
     String goodsSn;
     //

@@ -22,7 +22,7 @@
         <result property="unit" column="unit"/>
         <result property="updateTime" column="update_time"/>
         <result property="detail" column="detail"/>
-        <result property="gallerys" column="gallery"/>
+        <result property="gallery" column="gallery" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
     </resultMap>
 
     <sql id="baseSql">

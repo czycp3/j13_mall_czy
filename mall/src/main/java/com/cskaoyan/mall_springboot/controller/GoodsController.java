@@ -21,4 +21,9 @@ public class GoodsController {
     public BaseResultVo selectGoodsList(){
         return goodsService.selectGoodsList();
     }
+    @RequestMapping("/goods/detail")
+    @ResponseBody
+    public BaseResultVo selectGoodsById(String id){
+        return goodsService.selectGoodsById(id);
+    }
 }

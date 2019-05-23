@@ -23,10 +23,6 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public BaseResultVo selectGoodsList() {
         List<Goods> goodsList = goodsMapper.selectGoodsList();
-        for (Goods goods:goodsList) {
-            String[] gallery = goods.getGallerys().split(",");
-            goods.setGallery(gallery);
-        }
 
         BaseResultVo baseResultVo =new BaseResultVo();
         Data<Goods> goodsData = new Data<>();
@@ -38,5 +34,10 @@ public class GoodsServiceImpl implements GoodsService {
         baseResultVo.setData(goodsData);
         baseResultVo.setErrmsg("成功");
         return baseResultVo;
+    }
+
+    @Override
+    public BaseResultVo selectGoodsById(String id) {
+        return null;
     }
 }
