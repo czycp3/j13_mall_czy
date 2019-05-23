@@ -1,4 +1,4 @@
-package com.cskaoyan.mall_springboot.bean;
+package com.cskaoyan.mall_springboot.bean.user;
 
 import java.util.Date;
 
@@ -7,22 +7,22 @@ import java.util.Date;
  * @author cly
  */
 public class User {
-    int id;
-    String username;
-    String password;
-    int gender;
-    String birthday;
-    String lastLoginTime;
-    String lastLoginIp;
-    int userLevel;
-    String nickname;
-    String mobile;
-    String avatar;
-    String weixinOpenid;
-    int status;
-    String addTime;
-    String updateTime;
-    int deleted;
+    private int id;
+    private String username;
+    private String password;
+    private int gender;
+    private String birthday;
+    private String lastLoginTime;
+    private String lastLoginIp;
+    private int userLevel;
+    private String nickname;
+    private String mobile;
+    private String avatar;
+    private String weixinOpenid;
+    private int status;
+    private String addTime;
+    private String updateTime;
+    private int deleted;
 
     public int getId() {
         return id;

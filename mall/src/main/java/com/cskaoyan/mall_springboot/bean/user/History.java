@@ -3,13 +3,13 @@ package com.cskaoyan.mall_springboot.bean.user;
 /**
  * 搜索历史表
  */
-public class SearchHistory {
+public class History {
     private int id;
-    private int user_id;
+    private int userId;
     private String keyword;
     private String from;
-    private String add_time;
-    private String update_time;
+    private String addTime;
+    private String updateTime;
     private String deleted;
 
     public int getId() {
@@ -20,12 +20,12 @@ public class SearchHistory {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getKeyword() {
@@ -44,20 +44,20 @@ public class SearchHistory {
         this.from = from;
     }
 
-    public String getAdd_time() {
-        return add_time;
+    public String getAddTime() {
+        return addTime;
     }
 
-    public void setAdd_time(String add_time) {
-        this.add_time = add_time;
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
     }
 
-    public String getUpdate_time() {
-        return update_time;
+    public String getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(String update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getDeleted() {
