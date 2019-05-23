@@ -208,13 +208,30 @@
   <!--查询广告总数-->
   <select id="selectCountAd" resultType="java.lang.Integer">
     select count(*) from cskaoyan_mall_ad
+    <where>
+      deleted != 1
+      <if test="name != null">
+        and name like #{name}
+      </if>
+      <if test="content != null">
+        and content like #{content}
+      </if>
+    </where>
   </select>
 
   <!--分页查询广告-->
   <select id="queryAllAdByPage" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from cskaoyan_mall_ad
-    where deleted != 1
+    <where>
+      deleted != 1
+      <if test="name != null">
+        and name like #{name}
+      </if>
+      <if test="content != null">
+        and content like #{content}
+      </if>
+    </where>
     order by #{sort} #{order}
     limit #{limit} offset #{offset}
   </select>

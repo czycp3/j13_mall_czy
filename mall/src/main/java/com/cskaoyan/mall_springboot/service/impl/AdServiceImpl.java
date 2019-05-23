@@ -39,13 +39,23 @@ public class AdServiceImpl implements AdService {
      * @return BaseQueryVo
      */
     @Override
-    public BaseQueryVo queryAllAdByPage(int page, int limit, String sort, String order) {
+    public BaseQueryVo queryAllAdByPage(int page, int limit, String sort, String order,String name,String content) {
         BaseQueryVo baseQueryVo = new BaseQueryVo();
         ResultVo<Ad> resultVo = new ResultVo<>();
+
+        if(name != null){
+            name = "%" + name + "%";
+        }
+        if(content != null) {
+            content = "%" + content + "%";
+        }
+
         //查询custom总记录数
-        int total = adMapper.selectCountAd();
+        int total = adMapper.selectCountAd(name,content);
         int offset = (page - 1) * limit;
-        List<Ad> adList =  adMapper.queryAllAdByPage(limit,offset,sort,order);
+
+
+        List<Ad> adList =  adMapper.queryAllAdByPage(limit,offset,sort,order,name,content);
 
         resultVo.setItems(adList);
         resultVo.setTotal(total);

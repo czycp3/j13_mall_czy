@@ -32,9 +32,11 @@ public interface AdMapper {
 
     /**
      * 查询广告总数
+     * @param name
+     * @param content
      * @return int
      */
-    int selectCountAd();
+    int selectCountAd(String name,String content);
 
     /**
      * 分页查询广告
@@ -42,10 +44,13 @@ public interface AdMapper {
      * @param offset 偏移量
      * @param sort 排序字段
      * @param order 排序方式
+     * @param name
+     * @param content
      * @return List<Ad>
      */
     List<Ad> queryAllAdByPage(@Param("limit") int limit, @Param("offset") int offset,
-                              @Param("sort") String sort,@Param("order") String order);
+                              @Param("sort") String sort,@Param("order") String order,
+                              @Param("name") String name,@Param("content") String content);
 
 
 }

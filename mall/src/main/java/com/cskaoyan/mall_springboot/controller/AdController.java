@@ -38,8 +38,8 @@ public class AdController {
 
     @RequestMapping("/ad/list")
     @ResponseBody
-    public BaseQueryVo list(int page,int limit,String sort,String order){
-        return adService.queryAllAdByPage(page,limit,sort,order);
+    public BaseQueryVo list(int page,int limit,String sort,String order,String name,String content){
+        return adService.queryAllAdByPage(page,limit,sort,order,name,content);
     }
 
     @RequestMapping("/ad/update")
