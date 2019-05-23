@@ -1,9 +1,9 @@
-package com.cskaoyan.mall_springboot.service.impl.managementmall;
+package com.cskaoyan.mall_springboot.service.impl;
 
-import com.cskaoyan.mall_springboot.bean.managementmall.Region;
-import com.cskaoyan.mall_springboot.bean.managementmall.ReturnMallT;
-import com.cskaoyan.mall_springboot.mapper.managementmall.RegionMapper;
-import com.cskaoyan.mall_springboot.service.managementmall.RegionService;
+import com.cskaoyan.mall_springboot.bean.mallmg.Region;
+import com.cskaoyan.mall_springboot.bean.mallmg.ReturnMallT;
+import com.cskaoyan.mall_springboot.mapper.RegionMapper;
+import com.cskaoyan.mall_springboot.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

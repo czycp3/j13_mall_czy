@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cskaoyan.mall_springboot.mapper.managementmall.RegionMapper">
-    <resultMap id="BaseResultMap" type="com.cskaoyan.mall_springboot.bean.managementmall.Region">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.RegionMapper">
+    <resultMap id="BaseResultMap" type="com.cskaoyan.mall_springboot.bean.mallmg.Region">
     <id column="id"  property="id"/>
     <result column="pid"  property="pid"/>
     <result column="name"  property="name"/>

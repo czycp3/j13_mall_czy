@@ -1,11 +1,11 @@
-package com.cskaoyan.mall_springboot.bean.managementmall;
+package com.cskaoyan.mall_springboot.bean.mallmg;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
 @Component
+
 public class Region {
     Integer id;
     @JsonInclude(JsonInclude.Include.NON_NULL)

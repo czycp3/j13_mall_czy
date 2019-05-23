@@ -1,9 +1,8 @@
-package com.cskaoyan.mall_springboot.bean.managementmall;
+package com.cskaoyan.mall_springboot.bean.mallmg;
 
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
 @Component
 public class ReturnMallT<T>{
     Integer errno;

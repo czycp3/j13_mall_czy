@@ -1,6 +1,6 @@
-package com.cskaoyan.mall_springboot.mapper.managementmall;
+package com.cskaoyan.mall_springboot.mapper;
 
-import com.cskaoyan.mall_springboot.bean.managementmall.Region;
+import com.cskaoyan.mall_springboot.bean.mallmg.Region;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
