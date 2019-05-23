@@ -18,13 +18,20 @@ public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
         StringBuilder sb = new StringBuilder();
+
+/*
         for (int j = 0; j < strings.length; j++) {
             while (j == strings.length - 1) {
                 sb.append(strings[j]);
             }
             sb.append(strings[j]).append(",");
+*/
+
+        for (String str : strings) {
+            sb.append(str).append(",");
         }
-        preparedStatement.setString(i, sb.toString());
+        String substring = sb.toString().substring(sb.length() - 1);
+        preparedStatement.setString(i, substring);
     }
 
     /**
