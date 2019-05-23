@@ -2,6 +2,7 @@ package com.cskaoyan.mall_springboot.mapper;
 
 
 import com.cskaoyan.mall_springboot.bean.coupon.Coupon;
+import com.cskaoyan.mall_springboot.bean.coupon.CouponUser;
 import com.cskaoyan.mall_springboot.util.PageUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,4 +38,19 @@ public interface CouponMapper {
      * @return List<Coupon>
      */
     List<Coupon> queryAllCouponByPage(@Param("pu") PageUtil pu, @Param("coupon") Coupon coupon);
+
+    /**
+     * 查询有该优惠券的用户总数
+     * @param couponUser
+     * @return 数量
+     */
+    int selectCountCouponUser(@Param("couponUser") CouponUser couponUser);
+
+    /**
+     * 查询有该优惠券的用户总数
+     * @param couponUser
+     * @param pu
+     * @return List<CouponUser>
+     */
+    List<CouponUser> queryAllCouponUserByPage(@Param("pu") PageUtil pu, @Param("couponUser") CouponUser couponUser);
 }

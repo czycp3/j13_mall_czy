@@ -1,6 +1,7 @@
 package com.cskaoyan.mall_springboot.controller;
 
 import com.cskaoyan.mall_springboot.bean.coupon.Coupon;
+import com.cskaoyan.mall_springboot.bean.coupon.CouponUser;
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 import com.cskaoyan.mall_springboot.service.CouponService;
@@ -46,5 +47,17 @@ public class CouponController {
     @ResponseBody
     public SingleQueryVo create(@RequestBody Coupon coupon) {
         return couponService.create(coupon);
+    }
+
+    @RequestMapping("/coupon/read")
+    @ResponseBody
+    public SingleQueryVo read(int id){
+        return couponService.read(id);
+    }
+
+    @RequestMapping("/coupon/listuser")
+    @ResponseBody
+    public BaseQueryVo listUser(PageUtil pu, CouponUser couponUser) {
+        return couponService.queryCouponUser(pu,couponUser);
     }
 }

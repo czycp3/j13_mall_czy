@@ -1,6 +1,7 @@
 package com.cskaoyan.mall_springboot.service;
 
 import com.cskaoyan.mall_springboot.bean.coupon.Coupon;
+import com.cskaoyan.mall_springboot.bean.coupon.CouponUser;
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 import com.cskaoyan.mall_springboot.util.PageUtil;
@@ -37,4 +38,19 @@ public interface CouponService {
      * @return SingleQueryVo
      */
     SingleQueryVo create(Coupon coupon);
+
+    /**
+     * 获取单个优惠券信息
+     * @param id
+     * @return SingleQueryVo
+     */
+    SingleQueryVo read(int id);
+
+    /**
+     * 分页查询优惠券用户信息
+     * @param pu
+     * @param couponUser
+     * @return BaseQueryVo
+     */
+    BaseQueryVo queryCouponUser(PageUtil pu, CouponUser couponUser);
 }
