@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.cskaoyan.mall_springboot.bean.mallmg.Order">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_sn" property="orderSn"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="consignee" property="consignee"/>
+        <result column="mobile" property="mobile"/>
+        <result column="address" property="address"/>
+        <result column="message" property="message"/>
+        <result column="goods_price" property="goodsPrice"/>
+        <result column="freight_price" property="freightPrice"/>
+        <result column="coupon_price" property="couponPrice"/>
+        <result column="integral_price" property="integralPrice"/>
+        <result column="groupon_price" property="grouponPrice"/>
+        <result column="order_price" property="orderPrice"/>
+        <result column="actual_price" property="actualPrice"/>
+        <result column="pay_id" property="payId"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="ship_sn" property="shipSn"/>
+        <result column="ship_channel" property="shipChannel"/>
+        <result column="ship_time" property="shipTime"/>
+        <result column="confirm_time" property="confirmTime"/>
+        <result column="comments" property="comments"/>
+        <result column="end_time" property="endTime"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <resultMap id="ResultOrderGoodsMap" type="com.cskaoyan.mall_springboot.bean.mallmg.OrderGoods">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="goods_sn" property="goodsSn"/>
+        <result column="product_id" property="productId"/>
+        <result column="number" property="number"/>
+        <result column="price" property="price"/>
+        <result column="specifications" property="specifications"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="comment" property="comment"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, order_sn, order_status, consignee, mobile, address, message, goods_price,
+    freight_price, coupon_price, integral_price, groupon_price, order_price, actual_price,
+    pay_id, pay_time, ship_sn, ship_channel, ship_time, confirm_time, comments, end_time,
+    add_time, update_time, deleted
+  </sql>
+    <sql id="Base_Column_OrderGoods">
+        id,order_id,goods_id,goods_name,goods_sn,product_id,number,price,specifications,pic_url,comment,add_time,update_time,deleted
+    </sql>
+    <select id="SelectOrderCount" resultType="int">
+        select count(*) from cskaoyan_mall_order
+        where deleted=0
+    </select>
+    <select id="SelectOrderPage" parameterType="com.cskaoyan.mall_springboot.bean.mallmg.MallPageHelper"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_order
+        <where>
+            deleted=0
+            <if test="pageHelper.userId!=null">
+                <if test="pageHelper.userId!=''">
+                    and user_id=#{pageHelper.userId}
+                </if>
+            </if>
+            <if test="pageHelper.orderSn!=null">
+                <if test="pageHelper.orderSn!=''">
+                    and order_sn=#{pageHelper.orderSn}
+                </if>
+            </if>
+            <if test="pageHelper.orderStatusArray!=null">
+                <foreach collection="pageHelper.orderStatusArray" index="index" item="item"
+                         open="and" separator="or" close="">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        order by #{pageHelper.sort} #{pageHelper.order} limit #{offset},#{pageHelper.limit}
+    </select>
+    <select id="SelectOrderById" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from cskaoyan_mall_order
+        where id=#{id}
+    </select>
+<select id="SelectOrderGoodsById" resultMap="ResultOrderGoodsMap">
+    select <include refid="Base_Column_OrderGoods"/>
+    from cskaoyan_mall_order_goods
+    where order_id=#{orderId}
+</select>
+    <select id="SelectUserById" resultType="com.cskaoyan.mall_springboot.bean.mallmg.OrderUser">
+        select nickname,avatar
+        from cskaoyan_mall_user
+        where id=#{id}
+    </select>
+</mapper>
