@@ -11,10 +11,14 @@ import java.io.IOException;
  * @author CZY-Y7000P
  */
 public class FileUploadUtil {
+    private static final int MAX_SIZE = 16;
     public static Storage uploadUtil(MultipartFile file, HttpServletRequest req) throws IOException {
         Storage imageInfo = new Storage();
         //获取上传文件名
         String fileName = file.getOriginalFilename();
+        if(fileName != null && fileName.length() > MAX_SIZE){
+            fileName = fileName.substring(0,16);
+        }
         imageInfo.setName(fileName);
 
         //给文件名前加UUID
