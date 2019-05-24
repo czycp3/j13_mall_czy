@@ -30,7 +30,9 @@
             read_count = #{readCount},
             pic_url = #{picUrl},
             sort_order = #{sortOrder},
+            <if test="goods.length != 0">
             goods = #{goods,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
+            </if>
             add_time = #{addTime},
             update_time = #{updateTime},
             deleted = #{deleted}
