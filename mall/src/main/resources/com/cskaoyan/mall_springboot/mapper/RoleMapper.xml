@@ -29,6 +29,8 @@
 
       </if>
     </where>
+    order by #{pg.sort} #{pg.order}
+    limit #{pg.limit} offset #{pg.offset}
   </select>
 
   <update id="roleUpdate" parameterType="com.cskaoyan.mall_springboot.bean.system.Role">

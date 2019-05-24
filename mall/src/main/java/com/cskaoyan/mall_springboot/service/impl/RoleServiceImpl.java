@@ -23,11 +23,11 @@ public class RoleServiceImpl implements RoleService {
     public BaseQueryVo queryRoleList(PageHelper pageHelper,String name) {
         BaseQueryVo baseQueryVo = new BaseQueryVo();
         ResultVo<Role> resultVo = new ResultVo<>();
+        pageHelper.setOffset();;
 
         //查询custom总记录数
         resultVo.setTotal(mapper.selectCountRole());
-        int offset = pageHelper.getOffset();
-        resultVo.setItems(mapper.queryRoleList(pageHelper.getLimit(),offset,name));
+        resultVo.setItems(mapper.queryRoleList(pageHelper,name));
         baseQueryVo.setData(resultVo);
         baseQueryVo.setErrno(0);
         baseQueryVo.setErrmsg("成功");
