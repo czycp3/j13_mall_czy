@@ -6,18 +6,6 @@ import java.math.BigDecimal;
  * @author CZY-Y7000P
  */
 public class Groupon {
-    /*
-    id	int
-    goods_id	int
-    goods_name	varchar
-    pic_url	varchar
-    discount	decimal
-    discount_member	int
-    add_time	datetime
-    update_time	datetime
-    expire_time	datetime
-    deleted	tinyint
-     */
     private int id;
     private String goodsId;
     private String goodsName;

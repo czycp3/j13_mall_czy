@@ -53,23 +53,28 @@ public class RoleController {
     @RequestMapping("/role/options")
     @ResponseBody
     public SingleQueryVo roleOpt(){
-        SingleQueryVo singleQueryVo = new SingleQueryVo();
-        List list = new ArrayList();
-        Map<String,Object> map1 = new HashMap<>();
-        Map<String,Object> map2 = new HashMap<>();
-        Map<String,Object> map3 = new HashMap<>();
-        map1.put("label", "超级管理员");
-        map1.put("value", 1);
-        map2.put("label", "商场管理员");
-        map2.put("value", 2);
-        map3.put("label", "推广管理员");
-        map3.put("value", 3);
-        list.add(map1);
-        list.add(map2);
-        list.add(map3);
-        singleQueryVo.setErrno(0);
-        singleQueryVo.setErrmsg("成功");
-        singleQueryVo.setData(list);
-        return singleQueryVo;
+
+        return service.roleOpt();
+
+
+
+//        SingleQueryVo singleQueryVo = new SingleQueryVo();
+//        List list = new ArrayList();
+//        Map<String,Object> map1 = new HashMap<>();
+//        Map<String,Object> map2 = new HashMap<>();
+//        Map<String,Object> map3 = new HashMap<>();
+//        map1.put("label", "超级管理员");
+//        map1.put("value", 1);
+//        map2.put("label", "商场管理员");
+//        map2.put("value", 2);
+//        map3.put("label", "推广管理员");
+//        map3.put("value", 3);
+//        list.add(map1);
+//        list.add(map2);
+//        list.add(map3);
+//        singleQueryVo.setErrno(0);
+//        singleQueryVo.setErrmsg("成功");
+//        singleQueryVo.setData(list);
+//        return singleQueryVo;
     }
 }

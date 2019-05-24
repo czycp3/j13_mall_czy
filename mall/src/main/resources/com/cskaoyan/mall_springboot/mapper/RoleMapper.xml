@@ -10,6 +10,11 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
+
+  <resultMap id="RoleOpt" type="com.cskaoyan.mall_springboot.bean.system.RoleOptions">
+    <result column="name" property="label"/>
+    <result column="id" property="value"/>
+  </resultMap>
   <sql id="Base_Column_List">
     id, name, `desc`, enabled, add_time, update_time, deleted
   </sql>
@@ -116,5 +121,9 @@
   <select id="queryRoleById" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from cskaoyan_mall_role where id = #{id}
+  </select>
+
+  <select id="queryRoleOpt" resultMap="RoleOpt">
+    select id,name from cskaoyan_mall_role
   </select>
 </mapper>
