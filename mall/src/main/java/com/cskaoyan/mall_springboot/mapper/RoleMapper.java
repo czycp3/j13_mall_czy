@@ -1,6 +1,8 @@
 package com.cskaoyan.mall_springboot.mapper;
 
+import com.cskaoyan.mall_springboot.bean.PageHelper;
 import com.cskaoyan.mall_springboot.bean.system.Role;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * @Date: 2019/5/22 0022 下午 10:01
  */
 public interface RoleMapper {
-    List<Role> queryRoleList(int limit, int offset, String name);
+    List<Role> queryRoleList(@Param("pg") PageHelper pageHelper,@Param("name") String name);
 
     int selectCountRole();
 

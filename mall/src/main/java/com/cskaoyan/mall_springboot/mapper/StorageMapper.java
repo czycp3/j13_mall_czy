@@ -1,5 +1,6 @@
 package com.cskaoyan.mall_springboot.mapper;
 
+import com.cskaoyan.mall_springboot.bean.PageHelper;
 import com.cskaoyan.mall_springboot.bean.storage.Storage;
 import com.cskaoyan.mall_springboot.bean.storage.StorageExample;
 import org.apache.ibatis.annotations.Param;
@@ -42,4 +43,19 @@ public interface StorageMapper {
      * @return Storage
      */
     Storage selectByKey(Storage storage);
+
+    /**
+     * 查询存储总数
+     * @return int
+     */
+    int selectCountStorge();
+
+    /**
+     * 查询存储list
+     */
+    List queryStorgeList(@Param("pg") PageHelper pageHelper, @Param("key") String key, @Param("name") String name);
+
+    boolean updateStorage(Storage storage);
+
+    boolean deleteStorage(Storage storage);
 }

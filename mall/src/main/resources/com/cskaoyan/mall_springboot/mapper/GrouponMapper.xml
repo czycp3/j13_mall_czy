@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.GrouponMapper">
+    <resultMap id="BaseResultMap" type="com.cskaoyan.mall_springboot.bean.groupon.Groupon">
+        <id column="id" property="id"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="discount" property="discount"/>
+        <result column="discount_member" property="discountMember"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id,goods_id,goods_name,pic_url,discount,discount_member,add_time,update_time,expire_time,deleted
+    </sql>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id">
+        insert into cskaoyan_mall_groupon_rules
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            goods_id,
+            <if test="groupon.goodsName != null">
+                goods_name,
+            </if>
+            <if test="groupon.picUrl != null">
+                pic_url,
+            </if>
+            <if test="groupon.discount != null">
+                discount,
+            </if>
+            <if test="groupon.discountMember != 0">
+                discount_member,
+            </if>
+                add_time,update_time,
+            <if test="groupon.expireTime != null">
+                expire_time,
+            </if>
+            <if test="groupon.deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{groupon.goodsId},
+            <if test="groupon.goodsName != null">
+                #{groupon.goodsName},
+            </if>
+            <if test="groupon.picUrl != null">
+                #{groupon.picUrl},
+            </if>
+            <if test="groupon.discount != null">
+                #{groupon.discount},
+            </if>
+            <if test="groupon.discountMember != null">
+                #{groupon.discountMember},
+            </if>
+            now(),now(),
+            <if test="groupon.expireTime != null">
+                #{groupon.expireTime},
+            </if>
+            <if test="groupon.deleted != null">
+                #{groupon.deleted},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective">
+        update cskaoyan_mall_groupon_rules
+        <set>
+            goods_id = #{goodsId},
+            goods_name = #{goodsName},
+            pic_url = #{picUrl},
+            discount = #{discount},
+            discount_member = #{discountMember},
+            add_time = #{addTime},
+            update_time = now(),
+            expire_time = #{expireTime},
+            deleted = #{deleted}
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectCountGroupon" resultType="java.lang.Integer">
+        select count(*) from cskaoyan_mall_groupon_rules
+        <where>
+            deleted != 1
+            <if test="goodsId != null">
+                and goods_id like #{goodsId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryAllGrouponByPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_groupon_rules
+        <where>
+            deleted != 1
+            <if test="groupon.goodsId != null">
+                and goods_id like #{groupon.goodsId}
+            </if>
+        </where>
+        order by #{pu.sort} #{pu.order}
+        limit #{pu.limit} offset #{pu.offset}
+    </select>
+
+    <select id="selectByPrimaryKey" resultType="com.cskaoyan.mall_springboot.bean.groupon.Groupon">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_groupon_rules
+        where id = #{id}
+    </select>
+</mapper>
