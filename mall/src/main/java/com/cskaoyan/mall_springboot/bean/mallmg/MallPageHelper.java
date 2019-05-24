@@ -15,6 +15,7 @@ public class MallPageHelper {
     private Integer userId;
     private String orderSn;
     private int[] orderStatusArray;
+    private String question;
 
     //获取偏移量
     public int getOffset(){
@@ -24,7 +25,7 @@ public class MallPageHelper {
     public MallPageHelper() {
     }
 
-    public MallPageHelper(int page, int limit, String sort, String order, Integer id, String name, Integer userId, String orderSn, int[] orderStatusArray) {
+    public MallPageHelper(int page, int limit, String sort, String order, Integer id, String name, Integer userId, String orderSn, int[] orderStatusArray, String question) {
         this.page = page;
         this.limit = limit;
         this.sort = sort;
@@ -34,6 +35,23 @@ public class MallPageHelper {
         this.userId = userId;
         this.orderSn = orderSn;
         this.orderStatusArray = orderStatusArray;
+        this.question = question;
+    }
+
+    @Override
+    public String toString() {
+        return "MallPageHelper{" +
+                "page=" + page +
+                ", limit=" + limit +
+                ", sort='" + sort + '\'' +
+                ", order='" + order + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", userId=" + userId +
+                ", orderSn='" + orderSn + '\'' +
+                ", orderStatusArray=" + Arrays.toString(orderStatusArray) +
+                ", question='" + question + '\'' +
+                '}';
     }
 
     public int getPage() {
@@ -108,18 +126,11 @@ public class MallPageHelper {
         this.orderStatusArray = orderStatusArray;
     }
 
-    @Override
-    public String toString() {
-        return "MallPageHelper{" +
-                "page=" + page +
-                ", limit=" + limit +
-                ", sort='" + sort + '\'' +
-                ", order='" + order + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", userId=" + userId +
-                ", orderSn='" + orderSn + '\'' +
-                ", orderStatusArray=" + Arrays.toString(orderStatusArray) +
-                '}';
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }
