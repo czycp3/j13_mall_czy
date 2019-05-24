@@ -17,13 +17,14 @@ import java.sql.SQLException;
 public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
-        StringBuilder sb = new StringBuilder();
-        for (String str : strings) {
-            sb.append(str).append(",");
+        if(strings != null && strings.length != 0 ) {
+            StringBuilder sb = new StringBuilder();
+            for (String str : strings) {
+                sb.append(str).append(",");
+            }
+            String substring = sb.toString().substring(sb.length() - 1);
+            preparedStatement.setString(i, substring);
         }
-        String substring = sb.toString().substring(sb.length() - 1);
-        preparedStatement.setString(i, substring);
-
     }
 
     /**
