@@ -22,7 +22,9 @@ public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
             for (String str : strings) {
                 sb.append(str).append(",");
             }
-            String substring = sb.toString().substring(sb.length() - 1);
+            String s = sb.toString();
+            String substring = s.substring(0, s.length() - 1);
+
             preparedStatement.setString(i, substring);
         }
     }

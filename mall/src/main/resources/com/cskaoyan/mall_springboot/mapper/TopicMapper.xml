@@ -18,6 +18,61 @@
     <sql id="Base_Column_List">
       id,title,subtitle,content,price,read_count,pic_url,sort_order,goods,add_time,update_time,deleted
     </sql>
+    <!--插入新的topic-->
+    <insert id="insertSelective">
+      insert into cskaoyan_mall_topic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            title,subtitle,
+            <if test="content != null">
+                content,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="readCount != null">
+                read_count,
+            </if>
+            <if test="picUrl != null">
+                pic_url,
+            </if>
+            <if test="sortOrder != null">
+                sort_order,
+            </if>
+            <if test="goods.length != 0">
+                goods,
+            </if>
+                add_time,update_time,
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                #{title},#{subtitle},
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="price != null">
+                #{price},
+            </if>
+            <if test="readCount != null">
+                #{readCount},
+            </if>
+            <if test="picUrl != null">
+                #{picUrl},
+            </if>
+            <if test="sortOrder != null">
+                #{sortOrder},
+            </if>
+            <if test="goods.length != 0">
+                #{goods,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
+            </if>
+            now(),
+            now(),
+            <if test="deleted != null">
+                #{deleted,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
 
     <!--更新topic-->
     <update id="updateByPrimaryKeySelective">
@@ -34,7 +89,7 @@
             goods = #{goods,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
             </if>
             add_time = #{addTime},
-            update_time = #{updateTime},
+            update_time = now(),
             deleted = #{deleted}
         </set>
         where id = #{id,jdbcType=INTEGER}
