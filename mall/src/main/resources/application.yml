@@ -33,14 +33,23 @@ db:
   username: root
   password: 123456
 
+---
+spring:
+  profiles: cly
 
+db:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/cskaoyanmall?serverTimezone=GMT&useSSL=false
+  username: root
+  password: 123456
 
 ---
 spring:
-  profiles: tuixiaofei
+  profiles: zsw
 
 db:
   driver-class-name: com.mysql.cj.jdbc.Driver
   url: jdbc:mysql://localhost:3306/cskaoyanmall?serverTimezone=GMT&useSSL=false
   username: root
   password: mysql520520
+

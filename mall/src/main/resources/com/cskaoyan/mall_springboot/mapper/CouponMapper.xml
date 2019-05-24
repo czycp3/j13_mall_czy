@@ -71,6 +71,50 @@
     limit #{pu.limit} offset #{pu.offset}
   </select>
 
+  <!--查询有该优惠券的用户总数-->
+  <select id="selectCountCouponUser" resultType="java.lang.Integer">
+    select count(*) from cskaoyan_mall_coupon_user
+    <where>
+      deleted != 1 and coupon_id = #{couponUser.couponId}
+      <if test="couponUser.userId != 0">
+        and user_id = #{couponUser.userId}
+      </if>
+      <if test="couponUser.status != 0">
+        and status = #{couponUser.status}
+      </if>
+    </where>
+  </select>
+
+  <!--查询有该优惠券的用户总数-->
+  <resultMap id="userMap" type="com.cskaoyan.mall_springboot.bean.coupon.CouponUser">
+    <result column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="coupon_id" property="couponId"/>
+    <result column="status" property="status"/>
+    <result column="used_time" property="usedTime"/>
+    <result column="start_time" property="startTime"/>
+    <result column="end_time" property="endTime"/>
+    <result column="order_id" property="orderId"/>
+    <result column="add_time" property="addTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="deleted" property="deleted"/>
+  </resultMap>
+  <select id="queryAllCouponUserByPage" resultMap="userMap">
+    select id,user_id,coupon_id,status,used_time,start_time,end_time,order_id,add_time,update_time,deleted
+    from cskaoyan_mall_coupon_user
+    <where>
+      deleted != 1 and coupon_id = #{couponUser.couponId}
+      <if test="couponUser.userId != 0">
+        and user_id = #{couponUser.userId}
+      </if>
+      <if test="couponUser.status != 0">
+        and status = #{couponUser.status}
+      </if>
+    </where>
+    order by #{pu.sort} #{pu.order}
+    limit #{pu.limit} offset #{pu.offset}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyan_mall_coupon
     where id = #{id,jdbcType=INTEGER}

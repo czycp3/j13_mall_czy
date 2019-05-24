@@ -9,6 +9,11 @@ public class PageHelper {
     private int limit;
     private String sort;
     private String order;
+    private int offset;
+
+    public void setOffset() {
+        this.offset = ((page - 1) * limit);
+    }
 
     //获取偏移量
     public int getOffset(){

@@ -1,6 +1,7 @@
 package com.cskaoyan.mall_springboot.service.impl;
 
 import com.cskaoyan.mall_springboot.bean.coupon.Coupon;
+import com.cskaoyan.mall_springboot.bean.coupon.CouponUser;
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
@@ -122,6 +123,46 @@ public class CouponServiceImpl implements CouponService {
             throw new RuntimeException(e);
         }
         return singleQueryVo;
+    }
+
+    /**
+     * 查询单个优惠券的信息
+     * @param id
+     * @return SingleQueryVo
+     */
+    @Override
+    public SingleQueryVo read(int id) {
+        SingleQueryVo<Coupon> singleQueryVo = new SingleQueryVo<>();
+        Coupon coupon = couponMapper.selectByPrimaryKey(id);
+        singleQueryVo.setErrmsg("成功");
+        singleQueryVo.setErrno(0);
+        singleQueryVo.setData(coupon);
+        return singleQueryVo;
+    }
+
+    /**
+     * 分页查询优惠券用户信息
+     * @param pu
+     * @param couponUser
+     * @return BaseQueryVo
+     */
+    @Override
+    public BaseQueryVo queryCouponUser(PageUtil pu, CouponUser couponUser) {
+        BaseQueryVo baseQueryVo = new BaseQueryVo();
+        ResultVo<CouponUser> resultVo = new ResultVo<>();
+
+        int total = couponMapper.selectCountCouponUser(couponUser);
+        pu.setOffset();
+
+        List<CouponUser> cpuList = couponMapper.queryAllCouponUserByPage(pu,couponUser);
+
+        resultVo.setItems(cpuList);
+        resultVo.setTotal(total);
+        baseQueryVo.setErrno(0);
+        baseQueryVo.setErrmsg("成功");
+
+        baseQueryVo.setData(resultVo);
+        return baseQueryVo;
     }
 
 
