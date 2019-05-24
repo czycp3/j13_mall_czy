@@ -25,4 +25,20 @@ public interface GoodsMapper {
     List<Specification> selectSpecificationById(@Param("id")String id);
 
     List<Product> selectProductById(@Param("id")String id);
+
+    List<Category> selectCategory();
+
+    List<Brand> selectBrand();
+
+    List<Category> selectChildrenByPid(@Param("pid") Integer pid);
+
+    void updateAttributeByGoodsId(@Param("attribute") Attribute attribute, @Param("goodsId") int goodsId);
+
+    void updateGoodsByGoodsId(@Param("goods")Goods goods);
+
+    void updateProductByGoodsId(@Param("product")Product product, @Param("goodsId")int goodsId);
+
+    void updateSpecification(@Param("specification") Specification specification, @Param("goodsId")int goodsId);
+
+    void insertSpecification(@Param("specification") Specification specification, @Param("goodsId")int goodsId);
 }

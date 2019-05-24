@@ -14,7 +14,8 @@ import java.sql.SQLException;
  * @Date: 2019/5/23 15:20
  * @Version 1.0
  */
-public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
+public class
+StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
         StringBuilder sb = new StringBuilder();
@@ -43,6 +44,9 @@ public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
     @Override
     public String[] getNullableResult(ResultSet resultSet, String columnLabel) throws SQLException {
         String result= resultSet.getString(columnLabel);
+        if(result.length()<3){
+            return new String[0];
+        }
         String substring = result.substring(1, result.length() - 1);
         if(substring!=null) {
             String[] strings = substring.split(",");

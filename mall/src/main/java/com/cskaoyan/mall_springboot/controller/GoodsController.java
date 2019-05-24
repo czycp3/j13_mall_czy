@@ -1,6 +1,7 @@
 package com.cskaoyan.mall_springboot.controller;
 
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
+import com.cskaoyan.mall_springboot.bean.goods.Data;
 import com.cskaoyan.mall_springboot.service.goodsservice.GoodsService;
 import com.cskaoyan.mall_springboot.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,27 @@ public class GoodsController {
     @RequestMapping("/goods/list")
     @ResponseBody
     public BaseResultVo selectGoodsList(int page,int limit,String sort,String order){
-        return goodsService.selectGoodsList(page,limit,sort,order);
+        BaseResultVo baseResultVo = goodsService.selectGoodsList(page,limit,sort,order);
+        return baseResultVo;
     }
     @RequestMapping("/goods/detail")
     @ResponseBody
     public BaseResultVo selectGoodsById(@RequestParam String id){
-        return goodsService.selectGoodsById(id);
+        BaseResultVo baseResultVo = goodsService.selectGoodsById(id);
+        return baseResultVo;
     }
 
+    @RequestMapping("/goods/catAndBrand")
+    @ResponseBody
+    public BaseResultVo selectCatAndBrand(){
+        BaseResultVo baseResultVo = goodsService.selectCatAndBrand();
+        return baseResultVo;
+    }
 
+    @RequestMapping("/goods/update")
+    @ResponseBody
+    public BaseResultVo updateGoods(@RequestBody Data data){
+        BaseResultVo resultVo = goodsService.updateGoods(data);
+        return resultVo;
+    }
 }

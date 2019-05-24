@@ -1,6 +1,7 @@
 package com.cskaoyan.mall_springboot.service.goodsservice;
 
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
+import com.cskaoyan.mall_springboot.bean.goods.Data;
 
 /**
  * @Author: zero
@@ -16,4 +17,9 @@ public interface GoodsService {
      *@OtherMsg
      */
     BaseResultVo selectGoodsById(String id);
+
+    BaseResultVo selectCatAndBrand();
+
+    BaseResultVo updateGoods(Data baseResultVo);
+
 }
