@@ -14,7 +14,8 @@ import java.sql.SQLException;
  * @Date: 2019/5/23 15:20
  * @Version 1.0
  */
-public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
+public class
+StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
         if(strings != null && strings.length != 0 ) {
@@ -37,16 +38,6 @@ public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
      */
     @Override
     public String[] getNullableResult(ResultSet resultSet, String columnLabel) throws SQLException {
-//        String result= resultSet.getString(columnLabel);
-//        String substring = result.substring(1, result.length() - 1);
-//        if(substring!=null) {
-//            String[] strings = substring.split(",");
-//            for (int i = 0; i <strings.length; i++) {
-//                strings[i] = strings[i].split("\"")[1];
-//            }
-//            return strings;
-//        }
-//        return new String[0];
         return resultSet.getString(columnLabel).split(",");
     }
 

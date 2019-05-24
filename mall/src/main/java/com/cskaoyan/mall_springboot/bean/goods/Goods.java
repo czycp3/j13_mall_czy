@@ -14,7 +14,6 @@ import java.util.Arrays;
 public class Goods {
     //创建时间
     String addTime;
-    //
     int brandId;
     //商品简介
     String brief;

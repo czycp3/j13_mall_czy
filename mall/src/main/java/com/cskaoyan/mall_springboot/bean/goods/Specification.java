@@ -1,13 +1,15 @@
 package com.cskaoyan.mall_springboot.bean.goods;
 
+import java.util.Arrays;
+
 /**
  * @Author: zero
  * @Date: 2019/5/23 16:47
  * @Version 1.0
  */
 public class Specification {
-    int id;
-    int goodsId;
+    Integer id;
+    Integer goodsId;
     String specification;
     String value;
     String picUrl;
@@ -15,12 +17,13 @@ public class Specification {
     String updateTime;
     Boolean deleted;
 
+
     @Override
     public String toString() {
         return "Specification{" +
                 "id=" + id +
                 ", goodsId=" + goodsId +
-                ", specification='" + specification + '\'' +
+                ", specification=" + specification +
                 ", value='" + value + '\'' +
                 ", picUrl='" + picUrl + '\'' +
                 ", addTime='" + addTime + '\'' +
@@ -29,19 +32,19 @@ public class Specification {
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
 

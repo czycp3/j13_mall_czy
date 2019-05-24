@@ -36,11 +36,27 @@
         select
         <include refid="baseGoodsColumn"/>
         from cskaoyan_mall_goods
+        <where>
+            <if test="goodsSn!=null">
+                goods_sn like concat('%',#{goodsSn},'%')
+            </if>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
         order by #{sort} #{order}
         limit #{limit} offset #{offset}
     </select>
     <select id="selectTotal" resultType="int">
         select count(*) from cskaoyan_mall_goods
+        <where>
+            <if test="goodsSn!=null">
+                goods_sn like concat('%',#{goodsSn},'%')
+            </if>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
     </select>
 
 
@@ -114,4 +130,179 @@
     <select id="selectCategoryPidById" resultType="int">
         select pid from cskaoyan_mall_category where id=#{categoryId}
     </select>
+
+
+
+    <resultMap id="categoryMap" type="com.cskaoyan.mall_springboot.bean.mallmg.Category">
+        <id property="value" column="id"/>
+        <result property="label" column="name"/>
+    </resultMap>
+    <select id="selectCategory" resultMap="categoryMap">
+        select id, `name` from cskaoyan_mall_category where pid=0
+    </select>
+
+    <select id="selectChildrenByPid" resultMap="categoryMap">
+        select id, `name` from cskaoyan_mall_category where pid=#{pid}
+    </select>
+
+    <resultMap id="brandMap" type="com.cskaoyan.mall_springboot.bean.goods.Brand">
+        <id property="value" column="id"/>
+        <result property="label" column="name"/>
+        </resultMap>
+    <select id="selectBrand" resultMap="brandMap">
+        select id, `name` from cskaoyan_mall_brand
+    </select>
+
+
+
+    <update id="updateAttributeByGoodsId">
+        update cskaoyan_mall_goods_attribute
+        <set>
+            <if test="attribute.attribute!=null">
+                attribute=#{attribute.attribute},
+            </if>
+            <if test="attribute.value!=null">
+                `value`=#{attribute.value},
+            </if>
+            <if test="attribute.addTime!=null">
+                add_time =#{attribute.addTime},
+            </if>
+            <if test="attribute.updateTime!=null">
+                update_time=#{attribute.updateTime},
+            </if>
+            <if test="attribute.deleted!=null">
+               deleted =#{attribute.deleted}
+            </if>
+        </set>
+            where id=#{attribute.id} and goods_id=#{goodsId}
+    </update>
+
+     <update id="updateGoodsByGoodsId">
+        update cskaoyan_mall_goods
+        <set>
+            <if test="goods.addTime!=null">
+                add_time=#{goods.addTime},
+            </if>
+            <if test="goods.brandId!=null">
+                brand_id=#{goods.brandId},
+            </if>
+            <if test="goods.categoryId!=null">
+                category_id =#{goods.categoryId},
+            </if>
+            <if test="goods.counterPrice!=null">
+                counter_price=#{goods.counterPrice},
+            </if>
+            <if test="goods.deleted!=null">
+               deleted =#{goods.deleted},
+            </if>
+            <if test="goods.gallery.length!= 0">
+                gallery=#{goods.gallery,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
+            </if>
+            <if test="goods.goodsSn!=null">
+                goods_sn=#{goods.goodsSn},
+            </if>
+            <if test="goods.isHot!=null">
+                is_hot =#{goods.isHot},
+            </if>
+            <if test="goods.isNew!=null">
+                is_new=#{goods.isNew},
+            </if>
+            <if test="goods.isOnSale!=null">
+                is_on_sale =#{goods.isOnSale},
+            </if>
+            <if test="goods.keywords!=null">
+                keywords=#{goods.keywords},
+            </if>
+            <if test="goods.name!=null">
+                `name`=#{goods.name},
+            </if>
+            <if test="goods.picUrl!=null">
+                pic_url =#{goods.picUrl},
+            </if>
+            <if test="goods.retailPrice!=0">
+                retail_price=#{goods.retailPrice},
+            </if>
+            <if test="goods.shareUrl!=null">
+                share_url =#{goods.shareUrl},
+            </if>
+            <if test="goods.sortOrder!=null">
+                sort_order=#{goods.sortOrder},
+            </if>
+            <if test="goods.unit!=null">
+                unit =#{goods.unit},
+            </if>
+            <if test="goods.updateTime!=null">
+                update_time=#{goods.updateTime},
+            </if>
+            <if test="goods.detail!=null">
+                detail =#{goods.detail}
+            </if>
+        </set>
+         where id=#{goods.id}
+    </update>
+
+    <update id="updateProductByGoodsId">
+        update cskaoyan_mall_goods_product
+        <set>
+            <if test="product.specifications.length!=0">
+                specifications=#{product.specifications,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
+            </if>
+            <if test="product.price!=null">
+                 price=#{product.price},
+            </if>
+            <if test="product.number!=null">
+                `number` =#{product.number},
+            </if>
+            <if test="product.url!=null">
+                url=#{product.url},
+            </if>
+            <if test="product.addTime!=null">
+                add_time =#{product.addTime},
+            </if>
+            <if test="product.updateTime!=null">
+               update_time=#{product.updateTime},
+            </if>
+            <if test="product.deleted!=null">
+                deleted =#{product.deleted}
+            </if>
+        </set>
+        where goods_id=#{goodsId} and id=#{product.id}
+    </update>
+
+    <update id="updateSpecification">
+        update cskaoyan_mall_goods_specification
+        <set>
+            <if test="specification.specification!=null">
+                specification=#{specification.specification},
+            </if>
+            <if test="specification.value!=null">
+                `value`=#{specification.value},
+            </if>
+            <if test="specification.picUrl!=null">
+                pic_url =#{specification.picUrl},
+            </if>
+            <if test="specification.addTime!=null">
+                add_time =#{specification.addTime},
+            </if>
+            <if test="specification.updateTime!=null">
+                update_time=#{specification.updateTime},
+            </if>
+            <if test="specification.deleted!=null">
+                deleted =#{specification.deleted}
+            </if>
+        </set>
+        where goods_id=#{goodsId} and id=#{specification.id}
+    </update>
+
+    <insert id="insertSpecification">
+        insert into cskaoyan_mall_goods_specification
+        (id,goods_id,specification,`value`,pic_url,add_time,update_time,deleted)
+        values (null,#{goodsId},#{specification.specification},#{specification.value},
+        #{specification.picUrl},#{specification.addTime},#{specification.updateTime},#{specification.deleted})
+    </insert>
+
+    <delete id="deleteGoods">
+        delete from cskaoyan_mall_goods
+        where id=#{goods.id}
+    </delete>
 </mapper>

@@ -20,7 +20,25 @@ public class Category {
     private String addTime;
     private String updateTime;
     private Boolean deleted;
+    private String label;
+    private Integer value;
     ArrayList<Category> children;
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
 
     public Category() {
     }

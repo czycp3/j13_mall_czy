@@ -26,19 +26,19 @@ public class GrouponController {
 
     @RequestMapping("/groupon/list")
     @ResponseBody
-    public BaseQueryVo list(PageUtil pu, Groupon groupon){
-        return grouponService.queryAllGrouponByPage(pu,groupon);
+    public BaseQueryVo list(PageUtil pu, Groupon groupon) {
+        return grouponService.queryAllGrouponByPage(pu, groupon);
     }
 
     @RequestMapping("/groupon/update")
     @ResponseBody
-    public SingleQueryVo update(@RequestBody Groupon groupon){
+    public SingleQueryVo update(@RequestBody Groupon groupon) {
         return grouponService.updateGroupon(groupon);
     }
 
     @RequestMapping("/groupon/delete")
     @ResponseBody
-    public SingleQueryVo delete(@RequestBody Groupon groupon){
+    public SingleQueryVo delete(@RequestBody Groupon groupon) {
         return grouponService.deleteGroupon(groupon);
     }
 
@@ -48,3 +48,5 @@ public class GrouponController {
         return grouponService.create(groupon);
     }
 }
+
+

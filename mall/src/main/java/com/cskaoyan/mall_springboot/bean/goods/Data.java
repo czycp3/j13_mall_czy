@@ -1,5 +1,6 @@
 package com.cskaoyan.mall_springboot.bean.goods;
 
+import com.cskaoyan.mall_springboot.bean.mallmg.Category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 
@@ -18,8 +19,12 @@ public class Data<T> {
     List<Attribute> attributes;
     List<Specification> specifications;
     List<Product> products;
+
+    List<Brand> brandList;
+    List<Category> categoryList;
     int[] categoryIds;
     int total;
+
 
     @Override
     public String toString() {
@@ -29,10 +34,29 @@ public class Data<T> {
                 ", attributes=" + attributes +
                 ", specifications=" + specifications +
                 ", products=" + products +
+                ", brandList=" + brandList +
+                ", categoryList=" + categoryList +
                 ", categoryIds=" + Arrays.toString(categoryIds) +
                 ", total=" + total +
                 '}';
     }
+
+    public List<Brand> getBrandList() {
+        return brandList;
+    }
+
+    public void setBrandList(List<Brand> brandList) {
+        this.brandList = brandList;
+    }
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
+
 
     public Goods getGoods() {
         return goods;
