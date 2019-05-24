@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.StatMapper">
+
+    <!--查询用户数据-->
+    <select id="searchUserRows" resultType="Map">
+          select SUBSTR(add_time,1,10) as day,count(*)
+              as users from cskaoyan_mall_user group by SUBSTR(add_time,1,10)
+    </select>
+
+    <!--查询订单数据-->
+    <select id="searchOrderRows" resultType="Map">
+        SELECT SUBSTR(add_time,1,10) AS day,
+            COUNT(id) AS orders,
+            COUNT(user_id) AS customers,
+            SUM(actual_price) AS amount,
+            SUM(actual_price)/COUNT(user_id) AS pcr FROM cskaoyan_mall_order GROUP BY substr(add_time,1,10)
+    </select>
+
+    <!--查询商品数据-->
+    <select id="searchGoodsRows" resultType="Map">
+        select substr(add_time,1,10) as day,
+            count(order_id) as orders,
+            count(number) as products,
+            sum(price * number) as amount
+            from cskaoyan_mall_order_goods group by substr(add_time,1,10)
+    </select>
+</mapper>
