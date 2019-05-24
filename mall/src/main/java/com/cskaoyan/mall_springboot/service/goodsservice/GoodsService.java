@@ -9,7 +9,7 @@ import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
  */
 public interface GoodsService {
 
-    BaseResultVo selectGoodsList();
+    BaseResultVo selectGoodsList(int page,int limit,String sort,String order);
     /**
      *@Param  id 商品id
      *@Return   该商品id对应的商品类json对象
