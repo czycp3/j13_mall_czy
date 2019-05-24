@@ -35,4 +35,16 @@ public class TopicController {
     public SingleQueryVo update(@RequestBody Topic topic){
         return topicService.updateTopic(topic);
     }
+
+    @RequestMapping("/topic/delete")
+    @ResponseBody
+    public SingleQueryVo delete(@RequestBody Topic topic){
+        return topicService.deleteTopic(topic);
+    }
+
+    @RequestMapping("/topic/create")
+    @ResponseBody
+    public SingleQueryVo create(@RequestBody Topic topic) {
+        return topicService.create(topic);
+    }
 }

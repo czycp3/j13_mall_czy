@@ -1,5 +1,6 @@
 package com.cskaoyan.mall_springboot.bean.goods;
 
+import com.cskaoyan.mall_springboot.bean.mallmg.Category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 

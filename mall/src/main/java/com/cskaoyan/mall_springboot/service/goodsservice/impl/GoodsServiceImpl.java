@@ -1,6 +1,7 @@
 package com.cskaoyan.mall_springboot.service.goodsservice.impl;
 
 import com.cskaoyan.mall_springboot.bean.goods.*;
+import com.cskaoyan.mall_springboot.bean.mallmg.Category;
 import com.cskaoyan.mall_springboot.mapper.goodsmapper.GoodsMapper;
 import com.cskaoyan.mall_springboot.service.goodsservice.GoodsService;
 import org.apache.ibatis.session.SqlSessionException;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,12 +23,22 @@ public class GoodsServiceImpl implements GoodsService {
     GoodsMapper goodsMapper;
 
     @Override
-    public BaseResultVo selectGoodsList(int page, int limit, String sort, String order) {
-        int total = goodsMapper.selectTotal();
+    public BaseResultVo selectGoodsList(int page, int limit, String sort, String order, String goodsSn, String name) {
+        int total = goodsMapper.selectTotal(goodsSn, name);
         limit = total < limit ? total : limit;
         int offset = (page - 1) * (limit);
-        List<Goods> goodsList = goodsMapper.selectGoodsListByPage(limit, offset, sort, order);
-        return GoodsServiceImpl.packaging(goodsList);
+        List<Goods> goodsList = goodsMapper.selectGoodsListByPage(limit, offset, sort, order, goodsSn, name);
+
+        BaseResultVo baseResultVo = new BaseResultVo();
+        Data<Goods> goodsData = new Data<>();
+
+        goodsData.setItems(goodsList);
+        goodsData.setTotal(total);
+
+        baseResultVo.setErrno(0);
+        baseResultVo.setData(goodsData);
+        baseResultVo.setErrmsg("成功");
+        return baseResultVo;
     }
 
     @Override
@@ -61,7 +73,7 @@ public class GoodsServiceImpl implements GoodsService {
         for (Category category : categoryList) {
             //将pid=0的id当作pid
             Integer pid = category.getValue();
-            List<Category> categoryList1 = goodsMapper.selectChildrenByPid(pid);
+            ArrayList<Category> categoryList1 = goodsMapper.selectChildrenByPid(pid);
             category.setChildren(categoryList1);
         }
         List<Brand> brandList = goodsMapper.selectBrand();
@@ -101,7 +113,7 @@ public class GoodsServiceImpl implements GoodsService {
             for (Specification specification : specifications) {
                 if (specification.getId() != null) {
                     goodsMapper.updateSpecification(specification, goodsId);
-                }else if(specification.getId() == null){
+                } else if (specification.getId() == null) {
                     goodsMapper.insertSpecification(specification, goodsId);
                 }
             }
@@ -116,16 +128,17 @@ public class GoodsServiceImpl implements GoodsService {
         return resultVo;
     }
 
-    private static BaseResultVo packaging(List<Goods> goodsList) {
+    @Override
+    public BaseResultVo deleteGoods(Goods goods) {
         BaseResultVo baseResultVo = new BaseResultVo();
-        Data<Goods> goodsData = new Data<>();
-
-        goodsData.setItems(goodsList);
-        goodsData.setTotal(goodsList.size());
-
+        try {
+            goodsMapper.deleteGoods(goods);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         baseResultVo.setErrno(0);
-        baseResultVo.setData(goodsData);
         baseResultVo.setErrmsg("成功");
         return baseResultVo;
     }
+
 }

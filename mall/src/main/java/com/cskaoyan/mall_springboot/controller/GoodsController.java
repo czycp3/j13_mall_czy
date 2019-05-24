@@ -2,6 +2,7 @@ package com.cskaoyan.mall_springboot.controller;
 
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 import com.cskaoyan.mall_springboot.bean.goods.Data;
+import com.cskaoyan.mall_springboot.bean.goods.Goods;
 import com.cskaoyan.mall_springboot.service.goodsservice.GoodsService;
 import com.cskaoyan.mall_springboot.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class GoodsController {
     GoodsService goodsService;
     @RequestMapping("/goods/list")
     @ResponseBody
-    public BaseResultVo selectGoodsList(int page,int limit,String sort,String order){
-        BaseResultVo baseResultVo = goodsService.selectGoodsList(page,limit,sort,order);
+    public BaseResultVo selectGoodsList(int page,int limit,String sort,String order,String goodsSn,String name){
+        BaseResultVo baseResultVo = goodsService.selectGoodsList(page,limit,sort,order,goodsSn,name);
         return baseResultVo;
     }
     @RequestMapping("/goods/detail")
@@ -45,5 +46,12 @@ public class GoodsController {
     public BaseResultVo updateGoods(@RequestBody Data data){
         BaseResultVo resultVo = goodsService.updateGoods(data);
         return resultVo;
+    }
+
+    @RequestMapping("/goods/delete")
+    @ResponseBody
+    public BaseResultVo deleteGoods(@RequestBody Goods goods){
+        BaseResultVo baseResultVo = goodsService.deleteGoods(goods);
+        return baseResultVo;
     }
 }

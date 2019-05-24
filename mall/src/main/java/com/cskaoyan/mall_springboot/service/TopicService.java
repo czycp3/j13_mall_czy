@@ -23,4 +23,18 @@ public interface TopicService {
      * @return SingleQueryVo
      */
     SingleQueryVo updateTopic(Topic topic);
+
+    /**
+     * 删除topic
+     * @param topic
+     * @return SingleQueryVo
+     */
+    SingleQueryVo deleteTopic(Topic topic);
+
+    /**
+     * 新增topic
+     * @param topic
+     * @return SingleQueryVo
+     */
+    SingleQueryVo create(Topic topic);
 }

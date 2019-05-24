@@ -82,4 +82,50 @@ public class TopicServiceImpl implements TopicService {
         }
         return singleQueryVo;
     }
+
+    /**
+     * 删除topic
+     * @param topic
+     * @return SingleQueryVo
+     */
+    @Override
+    public SingleQueryVo deleteTopic(Topic topic) {
+        SingleQueryVo<Topic> singleQueryVo = new SingleQueryVo<>();
+
+        try {
+            topic.setDeleted(1);
+            int ret = topicMapper.updateByPrimaryKeySelective(topic);
+            if(ret == 1) {
+                singleQueryVo.setErrmsg("成功");
+                singleQueryVo.setErrno(0);
+            }
+        }catch (Exception e){
+            singleQueryVo.setErrmsg("删除失败");
+            throw new RuntimeException(e);
+        }
+        return singleQueryVo;
+    }
+
+    /**
+     * 新增topic
+     * @param topic
+     * @return SingleQueryVo
+     */
+    @Override
+    public SingleQueryVo create(Topic topic) {
+        SingleQueryVo<Topic> singleQueryVo = new SingleQueryVo<>();
+        try {
+            int ret = topicMapper.insertSelective(topic);
+            if(ret == 1) {
+                Topic topic1 = topicMapper.selectByPrimaryKey(topic.getId());
+                singleQueryVo.setErrmsg("成功");
+                singleQueryVo.setErrno(0);
+                singleQueryVo.setData(topic1);
+            }
+        }catch (Exception e){
+            singleQueryVo.setErrmsg("增加失败");
+            throw new RuntimeException(e);
+        }
+        return singleQueryVo;
+    }
 }

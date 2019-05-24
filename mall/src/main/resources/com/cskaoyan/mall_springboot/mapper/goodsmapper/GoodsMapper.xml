@@ -36,11 +36,27 @@
         select
         <include refid="baseGoodsColumn"/>
         from cskaoyan_mall_goods
+        <where>
+            <if test="goodsSn!=null">
+                goods_sn like concat('%',#{goodsSn},'%')
+            </if>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
         order by #{sort} #{order}
         limit #{limit} offset #{offset}
     </select>
     <select id="selectTotal" resultType="int">
         select count(*) from cskaoyan_mall_goods
+        <where>
+            <if test="goodsSn!=null">
+                goods_sn like concat('%',#{goodsSn},'%')
+            </if>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
     </select>
 
 
@@ -117,7 +133,7 @@
 
 
 
-    <resultMap id="categoryMap" type="com.cskaoyan.mall_springboot.bean.goods.Category">
+    <resultMap id="categoryMap" type="com.cskaoyan.mall_springboot.bean.mallmg.Category">
         <id property="value" column="id"/>
         <result property="label" column="name"/>
     </resultMap>
@@ -179,7 +195,7 @@
             <if test="goods.deleted!=null">
                deleted =#{goods.deleted},
             </if>
-            <if test="goods.gallery!=null">
+            <if test="goods.gallery.length!= 0">
                 gallery=#{goods.gallery,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
             </if>
             <if test="goods.goodsSn!=null">
@@ -228,7 +244,7 @@
     <update id="updateProductByGoodsId">
         update cskaoyan_mall_goods_product
         <set>
-            <if test="product.specifications!=null">
+            <if test="product.specifications.length!=0">
                 specifications=#{product.specifications,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
             </if>
             <if test="product.price!=null">
@@ -284,4 +300,9 @@
         values (null,#{goodsId},#{specification.specification},#{specification.value},
         #{specification.picUrl},#{specification.addTime},#{specification.updateTime},#{specification.deleted})
     </insert>
+
+    <delete id="deleteGoods">
+        delete from cskaoyan_mall_goods
+        where id=#{goods.id}
+    </delete>
 </mapper>

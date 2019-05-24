@@ -18,21 +18,16 @@ public class
 StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String[] strings, JdbcType jdbcType) throws SQLException {
-        StringBuilder sb = new StringBuilder();
-
-/*
-        for (int j = 0; j < strings.length; j++) {
-            while (j == strings.length - 1) {
-                sb.append(strings[j]);
+        if(strings != null && strings.length != 0 ) {
+            StringBuilder sb = new StringBuilder();
+            for (String str : strings) {
+                sb.append(str).append(",");
             }
-            sb.append(strings[j]).append(",");
-*/
+            String s = sb.toString();
+            String substring = s.substring(0, s.length() - 1);
 
-        for (String str : strings) {
-            sb.append(str).append(",");
+            preparedStatement.setString(i, substring);
         }
-        String substring = sb.toString().substring(sb.length() - 1);
-        preparedStatement.setString(i, substring);
     }
 
     /**
@@ -43,19 +38,7 @@ StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
      */
     @Override
     public String[] getNullableResult(ResultSet resultSet, String columnLabel) throws SQLException {
-        String result= resultSet.getString(columnLabel);
-        if(result.length()<3){
-            return new String[0];
-        }
-        String substring = result.substring(1, result.length() - 1);
-        if(substring!=null) {
-            String[] strings = substring.split(",");
-            for (int i = 0; i <strings.length; i++) {
-                strings[i] = strings[i].split("\"")[1];
-            }
-            return strings;
-        }
-        return new String[0];
+        return resultSet.getString(columnLabel).split(",");
     }
 
     @Override

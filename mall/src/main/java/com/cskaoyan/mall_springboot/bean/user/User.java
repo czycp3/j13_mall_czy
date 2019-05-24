@@ -1,46 +1,34 @@
-package com.cskaoyan.mall_springboot.bean;
+package com.cskaoyan.mall_springboot.bean.user;
+
+import java.util.Date;
 
 /**
- * @author CZY-Y7000P
+ * 用户表
+ * @author cly
  */
 public class User {
-    private Integer id;
-
+    private int id;
     private String username;
-
     private String password;
-
-    private Byte gender;
-
+    private int gender;
     private String birthday;
-
     private String lastLoginTime;
-
     private String lastLoginIp;
-
-    private Byte userLevel;
-
+    private int userLevel;
     private String nickname;
-
     private String mobile;
-
     private String avatar;
-
     private String weixinOpenid;
-
-    private Byte status;
-
+    private int status;
     private String addTime;
-
     private String updateTime;
+    private int deleted;
 
-    private Boolean deleted;
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,7 +37,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getPassword() {
@@ -57,14 +45,14 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
-    public Byte getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(Byte gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -89,14 +77,14 @@ public class User {
     }
 
     public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
+        this.lastLoginIp = lastLoginIp;
     }
 
-    public Byte getUserLevel() {
+    public int getUserLevel() {
         return userLevel;
     }
 
-    public void setUserLevel(Byte userLevel) {
+    public void setUserLevel(int userLevel) {
         this.userLevel = userLevel;
     }
 
@@ -105,7 +93,7 @@ public class User {
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+        this.nickname = nickname;
     }
 
     public String getMobile() {
@@ -113,7 +101,7 @@ public class User {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
     public String getAvatar() {
@@ -121,7 +109,7 @@ public class User {
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
+        this.avatar = avatar;
     }
 
     public String getWeixinOpenid() {
@@ -129,14 +117,14 @@ public class User {
     }
 
     public void setWeixinOpenid(String weixinOpenid) {
-        this.weixinOpenid = weixinOpenid == null ? null : weixinOpenid.trim();
+        this.weixinOpenid = weixinOpenid;
     }
 
-    public Byte getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -156,11 +144,33 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public Boolean getDeleted() {
+    public int getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(int deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", gender=" + gender +
+                ", birthday='" + birthday + '\'' +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
+                ", lastLoginIp='" + lastLoginIp + '\'' +
+                ", userLevel=" + userLevel +
+                ", nickname='" + nickname + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", weixinOpenid='" + weixinOpenid + '\'' +
+                ", status=" + status +
+                ", addTime='" + addTime + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", deleted=" + deleted +
+                '}';
     }
 }

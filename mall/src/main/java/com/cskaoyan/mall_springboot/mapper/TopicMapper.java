@@ -38,4 +38,11 @@ public interface TopicMapper {
      * @return Topic
      */
     Topic selectByPrimaryKey(int id);
+
+    /**
+     * 新增topic
+     * @param topic
+     * @return 成功行数
+     */
+    int insertSelective(Topic topic);
 }

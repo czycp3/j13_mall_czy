@@ -1,8 +1,10 @@
 package com.cskaoyan.mall_springboot.mapper.goodsmapper;
 
 import com.cskaoyan.mall_springboot.bean.goods.*;
+import com.cskaoyan.mall_springboot.bean.mallmg.Category;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,9 +18,9 @@ public interface GoodsMapper {
 
     int selectCategoryPidById(@Param("categoryId") int categoryId);
 
-    int selectTotal();
+    int selectTotal(@Param("goodsSn") String goodsSn, @Param("name") String name);
 
-    List<Goods> selectGoodsListByPage(@Param("limit") int limit, @Param("offset")int offset, @Param("sort") String sort, @Param("order") String order);
+    List<Goods> selectGoodsListByPage(@Param("limit") int limit, @Param("offset") int offset, @Param("sort") String sort, @Param("order") String order, @Param("goodsSn") String goodsSn, @Param("name") String name);
 
     List<Attribute> selectAttributeById(@Param("id")String id);
 
@@ -30,7 +32,7 @@ public interface GoodsMapper {
 
     List<Brand> selectBrand();
 
-    List<Category> selectChildrenByPid(@Param("pid") Integer pid);
+    ArrayList<Category> selectChildrenByPid(@Param("pid") Integer pid);
 
     void updateAttributeByGoodsId(@Param("attribute") Attribute attribute, @Param("goodsId") int goodsId);
 
@@ -41,4 +43,7 @@ public interface GoodsMapper {
     void updateSpecification(@Param("specification") Specification specification, @Param("goodsId")int goodsId);
 
     void insertSpecification(@Param("specification") Specification specification, @Param("goodsId")int goodsId);
+
+    void deleteGoods(@Param("goods") Goods goods);
+
 }
