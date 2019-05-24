@@ -22,4 +22,6 @@ public interface RoleMapper {
     boolean roleInsert(Role role);
 
     Role queryRoleById(int id);
+
+    List queryRoleOpt();
 }
