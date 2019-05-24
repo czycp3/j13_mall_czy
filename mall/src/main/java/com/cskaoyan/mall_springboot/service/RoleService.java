@@ -17,4 +17,6 @@ public interface RoleService {
     BaseQueryVo roleDelete(Role role);
 
     SingleQueryVo roleInsert(Role role);
+
+    SingleQueryVo roleOpt();
 }

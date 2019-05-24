@@ -74,4 +74,14 @@ public class RoleServiceImpl implements RoleService {
             return singleQueryVo;
         }
     }
+
+    @Override
+    public SingleQueryVo roleOpt() {
+        SingleQueryVo singleQueryVo = new SingleQueryVo();
+
+        singleQueryVo.setData(mapper.queryRoleOpt());
+        singleQueryVo.setErrno(0);
+        singleQueryVo.setErrmsg("成功");
+        return singleQueryVo;
+    }
 }
