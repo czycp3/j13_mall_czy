@@ -1,36 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mall_springboot.mapper.goodsmapper.GoodsMapper">
-    <resultMap id="baseMap" type="com.cskaoyan.mall_springboot.bean.goods.Goods">
-        <result property="addTime" column="add_time"/>
-        <result property="brandId" column="brand_id"/>
-        <result property="brief" column="brief"/>
-        <result property="categoryId" column="category_id"/>
-        <result property="counterPrice" column="counter_price"/>
-        <result property="deleted" column="deleted"/>
-        <result property="goodsSn" column="goods_sn"/>
-        <result property="id" column="id"/>
-        <result property="isHot" column="is_hot"/>
-        <result property="isNew" column="is_new"/>
-        <result property="isOnSale" column="is_on_sale"/>
-        <result property="keywords" column="keywords"/>
-        <result property="name" column="name"/>
-        <result property="picUrl" column="pic_url"/>
-        <result property="retailPrice" column="retail_price"/>
-        <result property="shareUrl" column="share_url"/>
-        <result property="sortOrder" column="sort_order"/>
-        <result property="unit" column="unit"/>
-        <result property="updateTime" column="update_time"/>
-        <result property="detail" column="detail"/>
-        <result property="gallery" column="gallery" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
+    <resultMap id="baseGoodsMap" type="com.cskaoyan.mall_springboot.bean.goods.Goods">
+        <result property="addTime" column="AddTime"/>
+        <result property="brandId" column="BrandId"/>
+        <result property="brief" column="Brief"/>
+        <result property="categoryId" column="CategoryId"/>
+        <result property="counterPrice" column="CounterPrice"/>
+        <result property="deleted" column="Deleted"/>
+        <result property="goodsSn" column="GoodsSn"/>
+        <result property="id" column="Id"/>
+        <result property="isHot" column="IsHot"/>
+        <result property="isNew" column="IsNew"/>
+        <result property="isOnSale" column="IsOnSale"/>
+        <result property="keywords" column="KeyWords"/>
+        <result property="name" column="Name"/>
+        <result property="picUrl" column="PicUrl"/>
+        <result property="retailPrice" column="RetailPrice"/>
+        <result property="shareUrl" column="ShareUrl"/>
+        <result property="sortOrder" column="SortOrder"/>
+        <result property="unit" column="Unit"/>
+        <result property="updateTime" column="UpdateTime"/>
+        <result property="detail" column="Detail"/>
+        <result property="gallery" column="Gallery" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
     </resultMap>
 
-    <sql id="baseSql">
-        select add_time,brand_id,brief,category_id,counter_price,deleted,gallery,goods_sn,id,is_hot,is_new,is_on_sale,keywords,name,pic_url,
-                retail_price,share_url,sort_order,unit,update_time,detail
-        from cskaoyan_mall_goods
+    <sql id="baseGoodsColumn">
+        add_time AddTime,brand_id BrandId,brief Brief,category_id CategoryId,counter_price CounterPrice,deleted Deleted,
+        gallery Gallery,goods_sn GoodsSn,id Id,is_hot IsHot,is_new IsNew,is_on_sale IsOnSale,keywords KeyWords,name Name,
+        pic_url PicUrl,retail_price RetailPrice,share_url ShareUrl,sort_order SortOrder,unit Unit,update_time UpdateTime,
+        detail Detail
     </sql>
-    <select id="selectGoodsList" resultMap="baseMap">
-        <include refid="baseSql"/>
+
+    <select id="selectGoodsListByPage" resultMap="baseGoodsMap">
+        select
+        <include refid="baseGoodsColumn"/>
+        from cskaoyan_mall_goods
+        order by #{sort} #{order}
+        limit #{limit} offset #{offset}
+    </select>
+    <select id="selectTotal" resultType="int">
+        select count(*) from cskaoyan_mall_goods
+    </select>
+
+
+    <resultMap id="AttributeMap" type="com.cskaoyan.mall_springboot.bean.goods.Attribute">
+            <result property="id" column="Id"/>
+            <result property="goodsId" column="GoodsId"/>
+            <result property="attribute" column="Attribute"/>
+            <result property="value" column="Value"/>
+            <result property="addTime" column="AddTime"/>
+            <result property="updateTime" column="UpdateTime"/>
+            <result property="deleted" column="Deleted"/>
+    </resultMap>
+    <resultMap id="SpecificationMap" type="com.cskaoyan.mall_springboot.bean.goods.Specification">
+            <result property="id" column="Id"/>
+            <result property="goodsId" column="GoodsId"/>
+            <result property="specification" column="Specification"/>
+            <result property="value" column="Value"/>
+            <result property="picUrl" column="PicUrl"/>
+            <result property="addTime" column="AddTime"/>
+            <result property="updateTime" column="UpdateTime"/>
+            <result property="deleted" column="Deleted"/>
+    </resultMap>
+
+    <resultMap id="ProductMap" type="com.cskaoyan.mall_springboot.bean.goods.Product">
+            <result property="id" column="proId"/>
+            <result property="goodsId" column="proGoodsId"/>
+            <result property="specifications" column="proSpecifications" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
+            <result property="price" column="proPrice"/>
+            <result property="number" column="proNumber"/>
+            <result property="url" column="proUrl"/>
+            <result property="addTime" column="proAddTime"/>
+            <result property="updateTime" column="proUpdateTime"/>
+            <result property="deleted" column="proDeleted"/>
+    </resultMap>
+
+    <select id="selectGoodsById" resultMap="baseGoodsMap">
+        select add_time AddTime,brand_id BrandId,brief Brief,category_id CategoryId,counter_price CounterPrice,deleted Deleted,
+                gallery Gallery,goods_sn GoodsSn,id Id,is_hot IsHot,is_new IsNew,is_on_sale IsOnSale,keywords KeyWords,
+                name Name,pic_url PicUrl,retail_price RetailPrice,share_url ShareUrl,sort_order SortOrder,unit Unit,
+                update_time UpdateTime,detail Detail
+        from cskaoyan_mall_goods
+        where id=#{id}
+    </select>
+
+    <select id="selectAttributeById" resultMap="AttributeMap">
+        select id Id,
+                goods_id GoodsId,
+                attribute Attribute,
+                value Value,
+                add_time AddTime,
+                update_time UpdateTime,
+                deleted Deleted
+                from cskaoyan_mall_goods_attribute
+                where goods_id=#{id}
+    </select>
+
+    <select id="selectSpecificationById" resultMap="SpecificationMap">
+        select id Id,goods_id GoodsId,specification Specification,value Value,pic_url PicUrl,
+                add_time AddTime,update_time UpdateTime,deleted Deleted
+                from cskaoyan_mall_goods_specification
+                where goods_id=#{id}
+    </select>
+
+    <select id="selectProductById" resultMap="ProductMap">
+        select  id proId,goods_id proGoodsId,specifications proSpecifications,price proPrice,number proNumber,url proUrl,
+                add_time proAddTime,update_time proUpdateTime,deleted proDeleted
+                from cskaoyan_mall_goods_product
+                where goods_id=#{id}
+    </select>
+
+    <select id="selectCategoryPidById" resultType="int">
+        select pid from cskaoyan_mall_category where id=#{categoryId}
     </select>
 </mapper>

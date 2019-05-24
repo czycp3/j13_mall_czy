@@ -31,12 +31,21 @@ public class StringTypeHandlerUtils extends BaseTypeHandler<String[]> {
      * @Param resultSet 查询结果
      * @Param columnLabel 列名
      * @Return String[]  返回类型为String[]数组
-     * @OtherMsg 查询结果为以逗号","形式分隔的String字符串,返回String[]数组
+     * @OtherMsg 查询结果为以逗号"[,]"形式分隔的String字符串,返回String[]数组
      */
     @Override
     public String[] getNullableResult(ResultSet resultSet, String columnLabel) throws SQLException {
-        String[] strings = resultSet.getString(columnLabel).split(",");
-        return strings;
+//        String result= resultSet.getString(columnLabel);
+//        String substring = result.substring(1, result.length() - 1);
+//        if(substring!=null) {
+//            String[] strings = substring.split(",");
+//            for (int i = 0; i <strings.length; i++) {
+//                strings[i] = strings[i].split("\"")[1];
+//            }
+//            return strings;
+//        }
+//        return new String[0];
+        return resultSet.getString(columnLabel).split(",");
     }
 
     @Override
