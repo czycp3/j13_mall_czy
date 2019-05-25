@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.IssueMapper">
+    <resultMap id="IssueMap" type="com.cskaoyan.mall_springboot.bean.mallmg.Issue">
+        <id column="id" property="id"/>
+        <result column="question" property="question"/>
+        <result column="answer" property="answer"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <sql id="Issue_Column">
+        id,question,answer,add_time,update_time,deleted
+    </sql>
+    <select id="SelectIssueCount" resultType="int">
+        select count(*) from cskaoyan_mall_issue
+        where deleted = 0
+    </select>
+    <select id="SelectIssueList" resultMap="IssueMap">
+        select <include refid="Issue_Column"/>
+        from cskaoyan_mall_issue
+        <where>
+          deleted =0
+            <if test="pageHelper.question!=null">
+                <if test="pageHelper.question!=''">
+                    and question LIKE CONCAT('%',#{pageHelper.question},'%')
+                </if>
+            </if>
+        </where>
+        order by #{pageHelper.sort} #{pageHelper.order} limit #{offset},#{pageHelper.limit}
+    </select>
+    <insert id="InsertIssue">
+        insert into cskaoyan_mall_issue
+        (<include refid="Issue_Column"/>)
+        values (null,#{issue.question},#{issue.answer},#{issue.addTime},now(),0);
+    </insert>
+    <select id="SelectIssueByIssue" resultMap="IssueMap">
+        select <include refid="Issue_Column"/>
+        from cskaoyan_mall_issue
+        where deleted = 0 and question=#{issue.question} and answer=#{issue.answer} and add_time=#{issue.addTime}
+    </select>
+    <update id="UpdateIssue">
+        update cskaoyan_mall_issue
+        set question = #{issue.question},answer =#{issue.answer},update_time=#{issue.addTime}
+        where id=#{issue.question} and deleted = 0
+    </update>
+    <update id="DeleteIssueById">
+        update cskaoyan_mall_issue
+        set deleted=1
+        where id=#{id}
+    </update>
+</mapper>

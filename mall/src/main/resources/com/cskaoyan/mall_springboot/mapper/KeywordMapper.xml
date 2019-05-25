@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.KeywordMapper">
+    <resultMap id="keywordMap" type="com.cskaoyan.mall_springboot.bean.mallmg.Keyword">
+        <id column="id" property="id"/>
+        <result column="keyword" property="keyword"/>
+        <result column="url" property="url"/>
+        <result column="is_hot" property="isHot"/>
+        <result column="is_default" property="isDefault"/>
+        <result column="sort_order" property="sortOrder"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <select id="SelectKeywordCount" resultType="int">
+        select count(*)
+        from cskaoyan_mall_keyword
+        where deleted =0
+    </select>
+    <select id="SelectKeywordList" resultMap="keywordMap">
+        select id,keyword,url,is_hot,is_default,sort_order,add_time,update_time,deleted
+        from cskaoyan_mall_keyword
+        <where>
+            deleted = 0
+            <if test="mallPageHelper.keyword!=null">
+                <if test="mallPageHelper.keyword!=''">
+                    and keyword like CONCAT('%',#{mallPageHelper.keyword},'%')
+                </if>
+            </if>
+            <if test="mallPageHelper.url!=null">
+                <if test="mallPageHelper.url!=''">
+                    and url=#{mallPageHelper.url}
+                </if>
+            </if>
+        </where>
+        order by #{mallPageHelper.sort} #{mallPageHelper.order}
+        limit #{offset},#{mallPageHelper.limit}
+    </select>
+    <insert id="InsertKeyword">
+        insert into cskaoyan_mall_keyword
+        (id,keyword,url,is_hot,is_default,sort_order,add_time,update_time,deleted)
+        values (null,#{keyword.keyword},#{keyword.url},
+        <if test="keyword.isHot!=null">
+            #{keyword.isHot}
+        </if>
+        <if test="keyword.isHot==null">
+            1
+        </if>
+        ,
+        <if test="keyword.isDefault!=null">
+            #{keyword.isDefault}
+        </if>
+        <if test="keyword.isDefault==null">
+            1
+        </if>
+        ,100,#{keyword.addTime},now(),0
+        )
+</insert>
+    <select id="SelectKeywordByAddTime" resultMap="keywordMap">
+        select id,keyword,url,is_hot,is_default,sort_order,add_time,update_time,deleted
+        from cskaoyan_mall_keyword
+        where add_time=#{addTime} and deleted = 0
+    </select>
+    <update id="UpdateKeyword">
+        update cskaoyan_mall_keyword
+        set keyword=#{keyword.keyword},url=#{keyword.url},
+        is_hot=
+        <if test="keyword.isHot!=null">
+        #{keyword.isHot}
+        </if>
+        <if test="keyword.isHot==null">
+            1
+        </if>
+        ,
+        is_default=
+        <if test="keyword.isDefault!=null">
+            #{keyword.isDefault}
+        </if>
+        <if test="keyword.isDefault==null">
+            1
+        </if>
+        ,update_time=#{keyword.updateTime}
+        where id=#{keyword.id}
+    </update>
+    <update id="DeleteKeyword">
+        update cskaoyan_mall_keyword
+        set deleted=1
+        where id=#{id}
+    </update>
+</mapper>
