@@ -1,9 +1,9 @@
-package com.cskaoyan.mall_springboot.service.goodsservice.impl;
+package com.cskaoyan.mall_springboot.service.goods.impl;
 
 import com.cskaoyan.mall_springboot.bean.goods.*;
 import com.cskaoyan.mall_springboot.bean.mallmg.Category;
-import com.cskaoyan.mall_springboot.mapper.goodsmapper.GoodsMapper;
-import com.cskaoyan.mall_springboot.service.goodsservice.GoodsService;
+import com.cskaoyan.mall_springboot.mapper.GoodsMapper;
+import com.cskaoyan.mall_springboot.service.goods.GoodsService;
 import org.apache.ibatis.session.SqlSessionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -139,6 +139,53 @@ public class GoodsServiceImpl implements GoodsService {
         baseResultVo.setErrno(0);
         baseResultVo.setErrmsg("成功");
         return baseResultVo;
+    }
+
+    @Override
+    public BaseResultVo insertGoods(Data data) {
+        BaseResultVo resultVo = new BaseResultVo();
+        try {
+            int goodsSn=Integer.parseInt(data.getGoods().getGoodsSn());
+            //通过goodsSn新增attribute表中的相关信息
+            List<Attribute> attributes = data.getAttributes();
+            for (Attribute attribute : attributes) {
+                goodsMapper.insertAttributeByGoodsSn(attribute, goodsSn);
+            }
+            //通过goodsSn新增goods表中的相关信息
+            Goods goods = data.getGoods();
+            int i = goodsMapper.selectIdByGoodsSn(goodsSn);
+            if (i == 0) {
+                goodsMapper.insertGoodsByGoodsSn(goods);
+            }else {
+                resultVo.setErrno(500);
+                resultVo.setErrmsg("商品编号重复，请更换商品编号后继续添加");
+                return resultVo;
+            }
+
+            //通过goodsSn新增product表中的相关信息
+            List<Product> products = data.getProducts();
+            for (Product product : products) {
+                goodsMapper.insertProductByGoodsSn(product, goodsSn);
+            }
+            //通过goodsSn新增specification表中的相关信息
+            List<Specification> specifications = data.getSpecifications();
+
+            for (Specification specification : specifications) {
+                if (specification.getId() != null) {
+                    goodsMapper.updateSpecification(specification, goodsSn);
+                } else if (specification.getId() == null) {
+                    goodsMapper.insertSpecification(specification, goodsSn);
+                }
+            }
+        } catch (SqlSessionException e) {
+            e.printStackTrace();
+            resultVo.setErrno(500);
+            resultVo.setErrmsg("更新失败");
+            return resultVo;
+        }
+        resultVo.setErrno(0);
+        resultVo.setErrmsg("成功");
+        return resultVo;
     }
 
 }

@@ -6,14 +6,12 @@ import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
 import com.cskaoyan.mall_springboot.bean.groupon.Groupon;
 import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 import com.cskaoyan.mall_springboot.mapper.GrouponMapper;
-import com.cskaoyan.mall_springboot.mapper.goodsmapper.GoodsMapper;
+import com.cskaoyan.mall_springboot.mapper.GoodsMapper;
 import com.cskaoyan.mall_springboot.service.GrouponService;
 import com.cskaoyan.mall_springboot.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**

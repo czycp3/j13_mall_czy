@@ -1,4 +1,4 @@
-package com.cskaoyan.mall_springboot.mapper.goodsmapper;
+package com.cskaoyan.mall_springboot.mapper;
 
 import com.cskaoyan.mall_springboot.bean.goods.*;
 import com.cskaoyan.mall_springboot.bean.mallmg.Category;
@@ -46,4 +46,11 @@ public interface GoodsMapper {
 
     void deleteGoods(@Param("goods") Goods goods);
 
+    void insertAttributeByGoodsSn(@Param("attribute") Attribute attribute, @Param("goodsSn")int goodsSn);
+
+    void insertGoodsByGoodsSn(@Param("goods") Goods goods);
+
+    void insertProductByGoodsSn(@Param("product")Product product, @Param("goodsSn")int goodsSn);
+
+    int selectIdByGoodsSn(@Param("goodsSn")int goodsSn);
 }

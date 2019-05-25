@@ -3,8 +3,7 @@ package com.cskaoyan.mall_springboot.controller;
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 import com.cskaoyan.mall_springboot.bean.goods.Data;
 import com.cskaoyan.mall_springboot.bean.goods.Goods;
-import com.cskaoyan.mall_springboot.service.goodsservice.GoodsService;
-import com.cskaoyan.mall_springboot.util.PageUtil;
+import com.cskaoyan.mall_springboot.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,5 +52,10 @@ public class GoodsController {
     public BaseResultVo deleteGoods(@RequestBody Goods goods){
         BaseResultVo baseResultVo = goodsService.deleteGoods(goods);
         return baseResultVo;
+    }
+    @RequestMapping("/goods/create")
+    @ResponseBody
+    public BaseResultVo insertGoods(@RequestBody Data data){
+        return goodsService.insertGoods(data);
     }
 }

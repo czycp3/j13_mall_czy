@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cskaoyan.mall_springboot.mapper.goodsmapper.GoodsMapper">
+<mapper namespace="com.cskaoyan.mall_springboot.mapper.GoodsMapper">
     <resultMap id="baseGoodsMap" type="com.cskaoyan.mall_springboot.bean.goods.Goods">
         <result property="addTime" column="AddTime"/>
         <result property="brandId" column="BrandId"/>
@@ -22,7 +22,7 @@
         <result property="unit" column="Unit"/>
         <result property="updateTime" column="UpdateTime"/>
         <result property="detail" column="Detail"/>
-        <result property="gallery" column="Gallery" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
+        <result property="gallery" column="Gallery" typeHandler="com.cskaoyan.mall_springboot.util.CrStringTypeHandlerUtils"/>
     </resultMap>
 
     <sql id="baseGoodsColumn">
@@ -83,7 +83,7 @@
     <resultMap id="ProductMap" type="com.cskaoyan.mall_springboot.bean.goods.Product">
             <result property="id" column="proId"/>
             <result property="goodsId" column="proGoodsId"/>
-            <result property="specifications" column="proSpecifications" typeHandler="com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils"/>
+            <result property="specifications" column="proSpecifications" typeHandler="com.cskaoyan.mall_springboot.util.CrStringTypeHandlerUtils"/>
             <result property="price" column="proPrice"/>
             <result property="number" column="proNumber"/>
             <result property="url" column="proUrl"/>
@@ -196,7 +196,7 @@
                deleted =#{goods.deleted},
             </if>
             <if test="goods.gallery.length!= 0">
-                gallery=#{goods.gallery,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
+                gallery=#{goods.gallery,typeHandler=com.cskaoyan.mall_springboot.util.CrStringTypeHandlerUtils},
             </if>
             <if test="goods.goodsSn!=null">
                 goods_sn=#{goods.goodsSn},
@@ -245,7 +245,7 @@
         update cskaoyan_mall_goods_product
         <set>
             <if test="product.specifications.length!=0">
-                specifications=#{product.specifications,typeHandler=com.cskaoyan.mall_springboot.util.StringTypeHandlerUtils},
+                specifications=#{product.specifications,typeHandler=com.cskaoyan.mall_springboot.util.CrStringTypeHandlerUtils},
             </if>
             <if test="product.price!=null">
                  price=#{product.price},
@@ -305,4 +305,35 @@
         delete from cskaoyan_mall_goods
         where id=#{goods.id}
     </delete>
+
+
+    <select id="selectIdByGoodsSn" resultType="int">
+        select count(*) from cskaoyan_mall_goods where id=#{goodsSn}
+    </select>
+    <insert id="insertGoodsByGoodsSn">
+        insert into cskaoyan_mall_goods
+        (add_time,brand_id,brief,category_id,counter_price,deleted,goods_sn,is_hot,is_new,is_on_sale,keywords,name,
+        pic_url,retail_price,share_url,sort_order,unit,update_time,detail,gallery)
+        values
+        (#{goods.addTime},#{goods.brandId},#{goods.brief},#{goods.categoryId},#{goods.counterPrice},
+         #{goods.deleted},#{goods.goodsSn},#{goods.isHot},#{goods.isNew},#{goods.isOnSale},
+         #{goods.keywords},#{goods.name},#{goods.picUrl},#{goods.retailPrice},#{goods.shareUrl},
+         #{goods.sortOrder},#{goods.unit},#{goods.updateTime},#{goods.detail},
+         #{goods.gallery,typeHandler=com.cskaoyan.mall_springboot.util.CrStringTypeHandlerUtils})
+    </insert>
+
+    <insert id="insertAttributeByGoodsSn">
+        insert into cskaoyan_mall_goods_attribute
+        (goods_id,attribute,value,add_time,update_time,deleted)
+        values
+        (#{goodsSn},#{attribute.attribute},#{attribute.value},#{attribute.addTime},#{attribute.updateTime},#{attribute.deleted})
+    </insert>
+
+    <insert id="insertProductByGoodsSn">
+        insert into cskaoyan_mall_goods_product
+        (goods_id,specifications,price,number,url,add_time,update_time,deleted)
+        values
+        (#{goodsSn},#{product.specifications,typeHandler=com.cskaoyan.mall_springboot.util.CrStringTypeHandlerUtils},#{product.price},
+        #{product.number},#{product.url},#{product.addTime},#{product.updateTime},#{product.deleted})
+    </insert>
 </mapper>

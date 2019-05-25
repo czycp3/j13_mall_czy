@@ -1,4 +1,4 @@
-package com.cskaoyan.mall_springboot.service.goodsservice;
+package com.cskaoyan.mall_springboot.service.goods;
 
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 import com.cskaoyan.mall_springboot.bean.goods.Data;
@@ -21,7 +21,9 @@ public interface GoodsService {
 
     BaseResultVo selectCatAndBrand();
 
-    BaseResultVo updateGoods(Data baseResultVo);
+    BaseResultVo updateGoods(Data data);
 
     BaseResultVo deleteGoods(Goods goods);
+
+    BaseResultVo insertGoods(Data data);
 }
