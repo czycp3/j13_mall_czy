@@ -16,6 +16,8 @@ public class MallPageHelper {
     private String orderSn;
     private int[] orderStatusArray;
     private String question;
+    private String keyword;
+    private String url;
 
     //获取偏移量
     public int getOffset(){
@@ -25,7 +27,7 @@ public class MallPageHelper {
     public MallPageHelper() {
     }
 
-    public MallPageHelper(int page, int limit, String sort, String order, Integer id, String name, Integer userId, String orderSn, int[] orderStatusArray, String question) {
+    public MallPageHelper(int page, int limit, String sort, String order, Integer id, String name, Integer userId, String orderSn, int[] orderStatusArray, String question, String keyword, String url) {
         this.page = page;
         this.limit = limit;
         this.sort = sort;
@@ -36,22 +38,8 @@ public class MallPageHelper {
         this.orderSn = orderSn;
         this.orderStatusArray = orderStatusArray;
         this.question = question;
-    }
-
-    @Override
-    public String toString() {
-        return "MallPageHelper{" +
-                "page=" + page +
-                ", limit=" + limit +
-                ", sort='" + sort + '\'' +
-                ", order='" + order + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", userId=" + userId +
-                ", orderSn='" + orderSn + '\'' +
-                ", orderStatusArray=" + Arrays.toString(orderStatusArray) +
-                ", question='" + question + '\'' +
-                '}';
+        this.keyword = keyword;
+        this.url = url;
     }
 
     public int getPage() {
@@ -132,5 +120,39 @@ public class MallPageHelper {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "MallPageHelper{" +
+                "page=" + page +
+                ", limit=" + limit +
+                ", sort='" + sort + '\'' +
+                ", order='" + order + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", userId=" + userId +
+                ", orderSn='" + orderSn + '\'' +
+                ", orderStatusArray=" + Arrays.toString(orderStatusArray) +
+                ", question='" + question + '\'' +
+                ", keyword='" + keyword + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

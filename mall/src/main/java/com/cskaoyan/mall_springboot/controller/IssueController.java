@@ -5,6 +5,7 @@ import com.cskaoyan.mall_springboot.bean.mallmg.MallPageHelper;
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 import com.cskaoyan.mall_springboot.service.IssueService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
