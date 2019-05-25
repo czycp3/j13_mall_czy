@@ -45,7 +45,7 @@
         order by #{sort} #{order}
         limit #{limit} offset #{offset}
     </select>
-    <delete id="deleteComment">
+    <delete id="deleteCommentById">
         delete from cskaoyan_mall_comment
         where id=#{id}
     </delete>
