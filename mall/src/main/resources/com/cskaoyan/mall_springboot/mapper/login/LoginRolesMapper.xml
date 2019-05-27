@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="selectByRoleIds" resultMap="BaseResultMapRols">
-        select  id,name,desc,enabled,add_time,update_time,deleted
+        select  name
         from cskaoyan_mall_role
         where id = #{roleId}
     </select>

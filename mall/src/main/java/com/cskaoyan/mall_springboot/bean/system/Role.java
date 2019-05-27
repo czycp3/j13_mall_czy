@@ -55,16 +55,4 @@ public class Role {
         this.deleted = deleted;
     }
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", desc='" + desc + '\'' +
-                ", enabled=" + enabled +
-                ", addTime='" + addTime + '\'' +
-                ", updateTime='" + updateTime + '\'' +
-                ", deleted=" + deleted +
-                '}';
-    }
 }

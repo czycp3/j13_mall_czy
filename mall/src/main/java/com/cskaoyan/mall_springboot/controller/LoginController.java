@@ -7,13 +7,16 @@ package com.cskaoyan.mall_springboot.controller;
 import com.cskaoyan.mall_springboot.bean.Admin;
 import com.cskaoyan.mall_springboot.bean.resultvo.ResponseUtil;
 import com.cskaoyan.mall_springboot.service.LoginService;
+import com.google.gson.Gson;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -92,45 +95,36 @@ public class LoginController {
         return ResponseUtil.ok();
     }
 
-
     @RequestMapping("/auth/info")
     @ResponseBody
-    public Object info(){
-//        Subject subject = SecurityUtils.getSubject();
-//        Admin admin = (Admin) subject.getPrincipal();
-//        Map<String, Object> data = new HashMap<>();
-//        data.put("name", admin.getUsername());
-//        data.put("avatar", admin.getAvatar());
-////
-//        Integer[] roleIds = admin.getRoleIds();
-//        Set<String> roles = loginService.quaryByIds(roleIds);
-//        Set<String> permissions = loginService.quaryByRoleIds(roleIds);
-//
-//        data.put("roles", roles);
-//        data.put("perms", permissions);
-//
-//        return ResponseUtil.ok(data);
+    public Object info(HttpServletRequest request){
+        String userString = request.getHeader("X-Litemall-Admin-Token");
+
+        Gson gson = new Gson();
+        Map<String, Map<String,Object>> map = new HashMap<String, Map<String,Object>>();
+        map = gson.fromJson(userString, map.getClass());
+
+
+        Map<String,Object> adminInfo =  map.get("adminInfo");
+        String username = (String)adminInfo.get("nickName");
+
+        List<Admin> adminList = loginService.findAdminByUsername(username);
+        Admin admin = adminList.get(0);
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", admin.getUsername());
+        data.put("avatar", admin.getAvatar());
+
+        Integer[] roleIds = admin.getRoleIds();
+
+        Set<String> roles = loginService.quaryByIds(roleIds);
+        Set<String> permissions = loginService.quaryByRoleIds(roleIds);
 
 
 
+        data.put("roles", roles);
+        data.put("perms", permissions);
 
-
-
-        Map<String,Object> map1 = new HashMap<>();
-        Map<String,Object> map2 = new HashMap<>();
-
-        map2.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        map2.put("name","admin123");
-        List perms = new ArrayList();
-        perms.add("*");
-        List roles = new ArrayList();
-        roles.add("超级管理员");
-        map2.put("perms",perms);
-        map2.put("roles",roles);
-        map1.put("data",map2);
-        map1.put("errmsg","成功");
-        map1.put("errno",0);
-        return map1;
+        return ResponseUtil.ok(data);
 
 }
 

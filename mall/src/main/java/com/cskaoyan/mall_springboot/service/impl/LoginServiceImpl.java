@@ -42,40 +42,36 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Set<String> quaryByIds(Integer[] roleIds) {
-        Set<String> roles = new HashSet<String>();
+        Set<String> rolesList = new HashSet<>();
         if(roleIds.length == 0){
-            return roles;
+            return rolesList;
         }
 
-        List<Role> roleList = new ArrayList<>();
         for (int i = 0; i < roleIds.length; i++) {
-            roleList.add(loginRolesMapper.selectByRoleIds(roleIds[i]));
-        }
-
-        for (Role role : roleList){
-            roles.add(role.getName());
+            List<Role> roleList = loginRolesMapper.selectByRoleIds(roleIds[i]);
+            rolesList.add(roleList.get(0).getName());
         }
 
 
-        return roles;
+
+        return rolesList;
     }
 
     @Override
     public Set<String> quaryByRoleIds(Integer[] roleIds) {
-        Set<String> permissions = new HashSet<String>();
+        Set<String> permissionList = new HashSet<>();
         if(roleIds.length == 0){
-            return permissions;
+            return permissionList;
         }
 
-        List<Permission> permissionList = new ArrayList<>();
         for (int i = 0; i < roleIds.length; i++) {
-            permissionList.add(loginPermissionMapper.selectByIds(roleIds[i]));
+            List<Permission> permission = loginPermissionMapper.selectByIds(roleIds[i]);
+            permissionList.add(permission.get(0).getPermission());
         }
 
-        for (Permission permission : permissionList){
-            permissions.add(permission.getPermission());
-        }
-
-        return permissions;
+        return permissionList;
     }
+
+
+
 }

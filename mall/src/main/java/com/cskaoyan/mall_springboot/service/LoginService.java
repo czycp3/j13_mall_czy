@@ -20,4 +20,5 @@ public interface LoginService {
 
     //找permissions
     Set<String> quaryByRoleIds(Integer[] roleIds);
+
 }
