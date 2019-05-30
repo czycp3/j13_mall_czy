@@ -1,6 +1,7 @@
 package com.cskaoyan.mall_springboot.controller;
 
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.WxQueryVo;
 import com.cskaoyan.mall_springboot.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,12 @@ public class MainController {
     @ResponseBody
     public BaseQueryVo dashboard(){
         return mainService.queryStatics();
+    }
+
+    @RequestMapping("/home/index")
+    @ResponseBody
+    public WxQueryVo index(){
+        return mainService.queryMainInfo();
     }
 
 

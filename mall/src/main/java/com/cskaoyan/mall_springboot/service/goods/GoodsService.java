@@ -3,6 +3,7 @@ package com.cskaoyan.mall_springboot.service.goods;
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 import com.cskaoyan.mall_springboot.bean.goods.Data;
 import com.cskaoyan.mall_springboot.bean.goods.Goods;
+import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 
 /**
  * @Author: zero
@@ -26,4 +27,13 @@ public interface GoodsService {
     BaseResultVo deleteGoods(Goods goods);
 
     BaseResultVo insertGoods(Data data);
+
+    /**
+     * 按品牌分页查询商品列表
+     * @param page
+     * @param size
+     * @param id
+     * @return SingleQueryVo
+     */
+    SingleQueryVo listGoods(int page, int size, int id);
 }

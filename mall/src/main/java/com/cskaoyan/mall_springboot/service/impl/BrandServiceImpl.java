@@ -2,9 +2,7 @@ package com.cskaoyan.mall_springboot.service.impl;
 
 import com.cskaoyan.mall_springboot.bean.mallmg.Brand;
 import com.cskaoyan.mall_springboot.bean.mallmg.MallPageHelper;
-import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
-import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
-import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.*;
 import com.cskaoyan.mall_springboot.mapper.BrandMapper;
 import com.cskaoyan.mall_springboot.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +76,19 @@ public class BrandServiceImpl implements BrandService {
             brandSingleQueryVo.setErrmsg("成功");
         }
         return brandSingleQueryVo;
+    }
+
+    @Override
+    public WxQueryVo queryBrandDetailById(int id) {
+        WxQueryVo wxQueryVo = new WxQueryVo();
+        WxResultVo wxResultVo = new WxResultVo();
+        Brand brand = brandMapper.queryBrandDetailById(id);
+
+        wxResultVo.setBrand(brand);
+        wxQueryVo.setData(wxResultVo);
+        wxQueryVo.setErrmsg("成功");
+        wxQueryVo.setErrno(0);
+        return wxQueryVo;
     }
 
     public SingleQueryVo<Brand> BrandMatch(Brand brand) {

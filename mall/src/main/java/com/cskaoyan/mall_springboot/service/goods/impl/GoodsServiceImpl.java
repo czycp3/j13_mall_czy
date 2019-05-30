@@ -2,6 +2,8 @@ package com.cskaoyan.mall_springboot.service.goods.impl;
 
 import com.cskaoyan.mall_springboot.bean.goods.*;
 import com.cskaoyan.mall_springboot.bean.mallmg.Category;
+import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.WxGoodsQueryVo;
 import com.cskaoyan.mall_springboot.mapper.GoodsMapper;
 import com.cskaoyan.mall_springboot.service.goods.GoodsService;
 import org.apache.ibatis.session.SqlSessionException;
@@ -186,6 +188,23 @@ public class GoodsServiceImpl implements GoodsService {
         resultVo.setErrno(0);
         resultVo.setErrmsg("成功");
         return resultVo;
+    }
+
+    @Override
+    public SingleQueryVo listGoods(int page, int size, int id) {
+        int count = goodsMapper.queryCountByBrandId(id);
+        int offset = (page - 1) * size;
+        Goods[] goodsList = goodsMapper.queryGoodsByBrandId(offset,size,id);
+
+        SingleQueryVo<WxGoodsQueryVo> singleQueryVo = new SingleQueryVo<>();
+        WxGoodsQueryVo wxGoodsQueryVo = new WxGoodsQueryVo();
+
+        wxGoodsQueryVo.setCount(count);
+        wxGoodsQueryVo.setGoodsList(goodsList);
+        singleQueryVo.setData(wxGoodsQueryVo);
+        singleQueryVo.setErrmsg("成功");
+        singleQueryVo.setErrno(0);
+        return singleQueryVo;
     }
 
 }

@@ -3,6 +3,7 @@ package com.cskaoyan.mall_springboot.controller;
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 import com.cskaoyan.mall_springboot.bean.goods.Data;
 import com.cskaoyan.mall_springboot.bean.goods.Goods;
+import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
 import com.cskaoyan.mall_springboot.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GoodsController {
     @Autowired
     GoodsService goodsService;
-    @RequestMapping("/goods/list")
-    @ResponseBody
-    public BaseResultVo selectGoodsList(int page,int limit,String sort,String order,String goodsSn,String name){
-        BaseResultVo baseResultVo = goodsService.selectGoodsList(page,limit,sort,order,goodsSn,name);
-        return baseResultVo;
-    }
+//    @RequestMapping("/goods/list")
+//    @ResponseBody
+//    public BaseResultVo selectGoodsList(int page,int limit,String sort,String order,String goodsSn,String name){
+//        BaseResultVo baseResultVo = goodsService.selectGoodsList(page,limit,sort,order,goodsSn,name);
+//        return baseResultVo;
+//    }
+
     @RequestMapping("/goods/detail")
     @ResponseBody
     public BaseResultVo selectGoodsById(@RequestParam String id){
@@ -58,4 +60,11 @@ public class GoodsController {
     public BaseResultVo insertGoods(@RequestBody Data data){
         return goodsService.insertGoods(data);
     }
+
+    @RequestMapping("/goods/list")
+    @ResponseBody
+    public SingleQueryVo listGoods(int page,int size,int brandId){
+        return goodsService.listGoods(page,size,brandId);
+    }
+
 }

@@ -53,4 +53,10 @@ public interface CouponMapper {
      * @return List<CouponUser>
      */
     List<CouponUser> queryAllCouponUserByPage(@Param("pu") PageUtil pu, @Param("couponUser") CouponUser couponUser);
+
+    /**
+     * 查询所有优惠券
+     * @return List<Coupon>
+     */
+    List<Coupon> queryCoupon();
 }

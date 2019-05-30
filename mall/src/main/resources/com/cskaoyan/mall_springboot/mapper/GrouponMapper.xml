@@ -112,4 +112,23 @@
         from cskaoyan_mall_groupon_rules
         where id = #{id}
     </select>
+
+    <resultMap id="grouponMap" type="com.cskaoyan.mall_springboot.bean.wx.GrouponList">
+        <result column="groupon_price" property="groupon_price"/>
+        <result column="discount_member" property="groupon_member"/>
+        <association property="goods" javaType="com.cskaoyan.mall_springboot.bean.goods.Goods">
+            <result column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="pic_url" property="picUrl"/>
+            <result column="retail_price" property="retailPrice"/>
+            <result column="brief" property="brief"/>
+            <result column="counter_price" property="counterPrice"/>
+        </association>
+    </resultMap>
+
+    <select id="queryGroupon" resultMap="grouponMap">
+       select g.id,g.`name`,g.pic_url,g.retail_price,g.brief,g.counter_price,gp.discount_member,(g.retail_price - gp.discount) as groupon_price
+       from cskaoyan_mall_groupon_rules gp,cskaoyan_mall_goods g
+       where gp.goods_id = g.id
+    </select>
 </mapper>

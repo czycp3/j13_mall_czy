@@ -45,4 +45,11 @@ public interface TopicMapper {
      * @return 成功行数
      */
     int insertSelective(Topic topic);
+
+    /**
+     * 查询所有topic
+     * @return  List<Topic>
+     */
+    List<Topic> queryAllTopic();
+
 }

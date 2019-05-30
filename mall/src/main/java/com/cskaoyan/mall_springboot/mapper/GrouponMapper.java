@@ -1,10 +1,10 @@
 package com.cskaoyan.mall_springboot.mapper;
 
 import com.cskaoyan.mall_springboot.bean.groupon.Groupon;
+import com.cskaoyan.mall_springboot.bean.wx.GrouponList;
 import com.cskaoyan.mall_springboot.util.PageUtil;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,4 +46,10 @@ public interface GrouponMapper {
      * @return int
      */
     int insertSelective(@Param("groupon") Groupon groupon);
+
+    /**
+     * 查询团购活动（WX）
+     * @return List<GrouponList>
+     */
+    List<GrouponList> queryGroupon();
 }

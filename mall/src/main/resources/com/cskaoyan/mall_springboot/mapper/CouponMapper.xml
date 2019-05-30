@@ -115,7 +115,22 @@
     limit #{pu.limit} offset #{pu.offset}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <resultMap id="couponMap" type="com.cskaoyan.mall_springboot.bean.coupon.Coupon">
+      <result column="id" property="id"/>
+      <result column="name" property="name"/>
+      <result column="desc" property="desc"/>
+      <result column="tag" property="tag"/>
+      <result column="discount" property="discount"/>
+      <result column="min" property="min"/>
+      <result column="days" property="days"/>
+    </resultMap>
+    <select id="queryCoupon" resultMap="couponMap">
+      select id, `name`, `desc`, tag, discount, `min`, days
+      from cskaoyan_mall_coupon
+      where deleted = 0
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyan_mall_coupon
     where id = #{id,jdbcType=INTEGER}
   </delete>
