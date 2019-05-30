@@ -91,6 +91,7 @@ public class LoginController {
 
     //@RequiresAuthentication
     @PostMapping("/auth/logout")
+    @ResponseBody
     public Object logout() {
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
