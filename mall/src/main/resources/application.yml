@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /wx
+    context-path: /admin
   port: 80
 
 spring:

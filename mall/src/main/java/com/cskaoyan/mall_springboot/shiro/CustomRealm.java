@@ -50,19 +50,18 @@ public class CustomRealm extends AuthorizingRealm {
         String username = upToken.getUsername();
         String password = new String(upToken.getPassword());
 
-        if (username == null || username.equals("")){
+        if (username == null || username.trim().isEmpty()){
             return (AuthenticationInfo) new AccountException("用户名不能为空");
         }
-        if (password == null || password.equals("")){
+        if (password == null || password.trim().isEmpty()){
             return (AuthenticationInfo) new AccountException("密码不能为空");
         }
 
         List<Admin> adminList = loginService.findAdminByUsername(username);
 
 
-
-
         Admin admin = adminList.get(0);
+
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(admin,admin.getPassword(),getName());
 
 
