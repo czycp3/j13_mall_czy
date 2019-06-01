@@ -10,9 +10,9 @@ public class MallPageHelper {
     private int limit;
     private String sort;
     private String order;
-    private Integer id;
+    private String id;
     private String name;
-    private Integer userId;
+    private String userId;
     private String orderSn;
     private int[] orderStatusArray;
     private String question;
@@ -25,21 +25,6 @@ public class MallPageHelper {
     }
 
     public MallPageHelper() {
-    }
-
-    public MallPageHelper(int page, int limit, String sort, String order, Integer id, String name, Integer userId, String orderSn, int[] orderStatusArray, String question, String keyword, String url) {
-        this.page = page;
-        this.limit = limit;
-        this.sort = sort;
-        this.order = order;
-        this.id = id;
-        this.name = name;
-        this.userId = userId;
-        this.orderSn = orderSn;
-        this.orderStatusArray = orderStatusArray;
-        this.question = question;
-        this.keyword = keyword;
-        this.url = url;
     }
 
     public int getPage() {
@@ -74,11 +59,11 @@ public class MallPageHelper {
         this.order = order;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -90,11 +75,11 @@ public class MallPageHelper {
         this.name = name;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
