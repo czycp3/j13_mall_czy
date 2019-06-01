@@ -26,11 +26,9 @@ public class BrandServiceImpl implements BrandService {
         ArrayList<Brand> brands = brandMapper.SelectBrandByPageIdName(mallPageHelper, offset);
         brandResultVo.setItems(brands);
         brandResultVo.setTotal(integer);
-        if (brands.size() > 0) {
-            brandBaseQueryVo.setErrmsg("成功");
-            brandBaseQueryVo.setErrno(0);
-            brandBaseQueryVo.setData(brandResultVo);
-        }
+        brandBaseQueryVo.setErrmsg("成功");
+        brandBaseQueryVo.setErrno(0);
+        brandBaseQueryVo.setData(brandResultVo);
         return brandBaseQueryVo;
     }
 
@@ -45,11 +43,9 @@ public class BrandServiceImpl implements BrandService {
         brand.setSortOrder(sortOrder);
         int i = brandMapper.InsertBrand(brand);
         Brand brand1 = brandMapper.SelectBrandByPicUrl(brand.getPicUrl());
-        if (i > 0) {
-            brandSingleQueryVo.setData(brand1);
-            brandSingleQueryVo.setErrno(0);
-            brandSingleQueryVo.setErrmsg("成功");
-        }
+        brandSingleQueryVo.setData(brand1);
+        brandSingleQueryVo.setErrno(0);
+        brandSingleQueryVo.setErrmsg("成功");
         return brandSingleQueryVo;
     }
 
@@ -83,7 +79,6 @@ public class BrandServiceImpl implements BrandService {
         WxQueryVo wxQueryVo = new WxQueryVo();
         WxResultVo wxResultVo = new WxResultVo();
         Brand brand = brandMapper.queryBrandDetailById(id);
-
         wxResultVo.setBrand(brand);
         wxQueryVo.setData(wxResultVo);
         wxQueryVo.setErrmsg("成功");

@@ -9,6 +9,7 @@ import com.cskaoyan.mall_springboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Service
@@ -23,10 +24,8 @@ public class CategoryServiceImpl implements CategoryService {
     public SingleQueryVo<ArrayList<Category>> SelectAllCategory() {
         ArrayList<Category> categories = categoryMapper.SelectAllCategory();
         categorySingleQueryVo.setData(new ArrayList<Category>());
-        if (categories.size() > 0) {
-            categorySingleQueryVo.setErrno(0);
-            categorySingleQueryVo.setErrmsg("成功");
-        }
+        categorySingleQueryVo.setErrno(0);
+        categorySingleQueryVo.setErrmsg("成功");
         for (Category category : categories) {
             if (category.getPid() != null && category.getPid() == 0) {
                 category.setPid(null);
@@ -46,24 +45,29 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return categorySingleQueryVo;
     }
-     //封装父分类
+
+    //封装父分类
     @Override
     public SingleQueryVo<ArrayList<TopCategory>> SelectAllTopCategory() {
         ArrayList<TopCategory> topCategories = categoryMapper.SelectAllTopCategory();
         SingleQueryVo<ArrayList<TopCategory>> arrayListSingleQueryVo = new SingleQueryVo<>();
-        if (topCategories.size() > 0) {
             arrayListSingleQueryVo.setErrmsg("成功");
             arrayListSingleQueryVo.setErrno(0);
             arrayListSingleQueryVo.setData(topCategories);
-        }
         return arrayListSingleQueryVo;
     }
-    //封装单个分类
+
     @Override
     public SingleQueryVo<Category> InsertCategory(Category category) {
-        int i = categoryMapper.InsertCategory(category);
         SingleQueryVo<Category> categoryServiceSingleQueryVo = new SingleQueryVo<>();
-        if (i>0) {
+        if (category.getIconUrl()==null||"".equals(category.getIconUrl())){
+            categoryServiceSingleQueryVo.setData(null);
+            categoryServiceSingleQueryVo.setErrmsg("请插入类名图标");
+            categoryServiceSingleQueryVo.setErrno(401);
+            return categoryServiceSingleQueryVo;
+        }
+        int i = categoryMapper.InsertCategory(category);
+        if (i > 0) {
             Category category1 = categoryMapper.SelectOneCategoryByIconUrl(category.getIconUrl());
             if (category1 != null) {
                 categoryServiceSingleQueryVo.setData(category1);
@@ -78,7 +82,7 @@ public class CategoryServiceImpl implements CategoryService {
     public SingleQueryVo UpdateCategory(Category category) {
         int i = categoryMapper.UpdateCategory(category);
         SingleQueryVo<Object> objectSingleQueryVo = new SingleQueryVo<>();
-        if (i>0){
+        if (i > 0) {
             objectSingleQueryVo.setErrmsg("成功");
             objectSingleQueryVo.setErrno(0);
         }
@@ -89,7 +93,7 @@ public class CategoryServiceImpl implements CategoryService {
     public SingleQueryVo DeleteCategory(Category category) {
         SingleQueryVo<Object> objectSingleQueryVo = new SingleQueryVo<>();
         Category category1 = categoryMapper.SelectOneCategoryByIconUrl(category.getIconUrl());
-        if (category1!=null) {
+        if (category1 != null) {
             int i = categoryMapper.DeleteCategoryById(category1.getId());
             int i1 = 1;
             if (category1.getPid() == 0) {

@@ -21,10 +21,8 @@ public class RegionServiceImpl implements RegionService {
     @Override
     public ReturnMallT<Region> selectAllRegion() {
         List<Region> regions = regionMapper.selectAllRegion();
-        if (regions.size()>0){
-            returnMallT.setErrmsg("成功");
-            returnMallT.setErrno(0);
-        }
+        returnMallT.setErrmsg("成功");
+        returnMallT.setErrno(0);
         HashMap<Integer, ArrayList<Region>> regionMap = new HashMap<>();
         returnMallT.setData(new ArrayList<Region>());
         List<Region> data = returnMallT.getData();
@@ -48,7 +46,7 @@ public class RegionServiceImpl implements RegionService {
             if (regionMap.containsKey(region.getId())) {
                 List<Region> regions1 = regionMap.get(region.getId());
                 region.setChildren(regions1);
-                if (region.getPid()!=null&&region.getPid().equals(0)){
+                if (region.getPid() != null && region.getPid().equals(0)) {
                     region.setPid(null);
                     data.add(region);
                 }
