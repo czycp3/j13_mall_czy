@@ -29,7 +29,7 @@
             </if>
             <if test="mallPageHelper.url!=null">
                 <if test="mallPageHelper.url!=''">
-                    and url=#{mallPageHelper.url}
+                    and url like concat('%',#{mallPageHelper.url},'%')
                 </if>
             </if>
         </where>

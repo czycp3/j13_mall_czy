@@ -67,17 +67,18 @@
             deleted=0
             <if test="pageHelper.userId!=null">
                 <if test="pageHelper.userId!=''">
-                    and user_id=#{pageHelper.userId}
+                    and user_id like  concat('%',#{pageHelper.userId},'%')
                 </if>
             </if>
             <if test="pageHelper.orderSn!=null">
                 <if test="pageHelper.orderSn!=''">
-                    and order_sn=#{pageHelper.orderSn}
+                    and order_sn like concat('%',#{pageHelper.orderSn},'%')
                 </if>
             </if>
             <if test="pageHelper.orderStatusArray!=null">
+                and order_status in
                 <foreach collection="pageHelper.orderStatusArray" index="index" item="item"
-                         open="and" separator="or" close="">
+                         open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
