@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
@@ -22,4 +23,8 @@ public interface CategoryMapper {
     int DeleteCategoryById(@Param("id") Integer id);
 
     int DeleteCategoryByPid(@Param("pid") Integer pid);
+
+    List<Category> getCategoryListByPid(@Param("pid") int i);
+
+    Category selectCategoryById(@Param("id") int id);
 }

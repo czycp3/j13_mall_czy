@@ -58,4 +58,10 @@ public class GoodsController {
     public BaseResultVo insertGoods(@RequestBody Data data){
         return goodsService.insertGoods(data);
     }
+
+    @RequestMapping("/wx/goods/count")
+    @ResponseBody
+    public BaseResultVo getGoodsCount(){
+        return goodsService.getGoodsCount();
+    }
 }

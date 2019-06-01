@@ -62,4 +62,17 @@
         set deleted=1
         where pid=#{pid}
     </update>
+
+    <select id="getCategoryListByPid" resultMap="BaseresultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_category
+        where pid=#{pid}
+    </select>
+    <select id="selectCategoryById" resultMap="BaseresultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_category
+        where id=#{id}
+    </select>
 </mapper>

@@ -188,4 +188,16 @@ public class GoodsServiceImpl implements GoodsService {
         return resultVo;
     }
 
+    @Override
+    public BaseResultVo getGoodsCount() {
+        int total = goodsMapper.selectTotal(null,null);
+        BaseResultVo resultVo = new BaseResultVo();
+        Data<Object> data = new Data<>();
+        data.setGoodsCount(total);
+        resultVo.setData(data);
+        resultVo.setErrmsg("成功");
+        resultVo.setErrno(0);
+        return resultVo;
+    }
+
 }

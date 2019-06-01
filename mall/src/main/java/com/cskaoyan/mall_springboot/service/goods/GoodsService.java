@@ -26,4 +26,6 @@ public interface GoodsService {
     BaseResultVo deleteGoods(Goods goods);
 
     BaseResultVo insertGoods(Data data);
+
+    BaseResultVo getGoodsCount();
 }
