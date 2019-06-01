@@ -1,6 +1,5 @@
 package com.cskaoyan.mall_springboot.service.impl;
 
-import com.cskaoyan.mall_springboot.bean.goods.Goods;
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
 import com.cskaoyan.mall_springboot.bean.groupon.Groupon;

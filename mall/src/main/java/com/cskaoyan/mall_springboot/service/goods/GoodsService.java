@@ -2,7 +2,6 @@ package com.cskaoyan.mall_springboot.service.goods;
 
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 import com.cskaoyan.mall_springboot.bean.goods.Data;
-import com.cskaoyan.mall_springboot.bean.goods.Goods;
 
 /**
  * @Author: zero

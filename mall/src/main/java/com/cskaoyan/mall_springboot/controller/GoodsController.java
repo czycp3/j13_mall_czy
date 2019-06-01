@@ -2,7 +2,6 @@ package com.cskaoyan.mall_springboot.controller;
 
 import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 import com.cskaoyan.mall_springboot.bean.goods.Data;
-import com.cskaoyan.mall_springboot.bean.goods.Goods;
 import com.cskaoyan.mall_springboot.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
