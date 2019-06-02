@@ -2,6 +2,7 @@ package com.cskaoyan.mall_springboot.mapper;
 
 import com.cskaoyan.mall_springboot.bean.mallmg.Category;
 import com.cskaoyan.mall_springboot.bean.mallmg.TopCategory;
+import com.cskaoyan.mall_springboot.bean.wx.FloorGoodsList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +28,6 @@ public interface CategoryMapper {
     List<Category> getCategoryListByPid(@Param("pid") int i);
 
     Category selectCategoryById(@Param("id") int id);
+
+    List<FloorGoodsList> queryCategory();
 }

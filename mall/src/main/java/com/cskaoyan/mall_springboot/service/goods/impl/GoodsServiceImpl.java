@@ -2,6 +2,8 @@ package com.cskaoyan.mall_springboot.service.goods.impl;
 
 import com.cskaoyan.mall_springboot.bean.goods.*;
 import com.cskaoyan.mall_springboot.bean.mallmg.Category;
+import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.WxGoodsQueryVo;
 import com.cskaoyan.mall_springboot.mapper.GoodsMapper;
 import com.cskaoyan.mall_springboot.service.goods.GoodsService;
 import org.apache.ibatis.session.SqlSessionException;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author: zero
@@ -95,8 +99,21 @@ public class GoodsServiceImpl implements GoodsService {
             int goodsId = data.getGoods().getId();
             //通过goodsId更新attribute表中的相关信息
             List<Attribute> attributes = data.getAttributes();
+            //通过goodsId查找原表中goodsId对应的id数组
+            Set<Integer> idListByGoodsId = goodsMapper.selectIdListByGoodsId(goodsId);
             for (Attribute attribute : attributes) {
-                goodsMapper.updateAttributeByGoodsId(attribute, goodsId);
+                if(idListByGoodsId.contains(attribute.getId())){
+                    goodsMapper.updateAttributeByGoodsId(attribute, goodsId);
+                    idListByGoodsId.remove(attribute.getId());
+                }else {
+                    goodsMapper.createAttributeByGoodsId(attribute, goodsId);
+                }
+            }
+            Iterator<Integer> iterator = idListByGoodsId.iterator();
+            //删除更新时删除的表中原有的数据
+            while(iterator.hasNext()){
+                int id = iterator.next();
+                goodsMapper.deleteAttributeById(id);
             }
             //通过goodsId更新goods表中的相关信息
             Goods goods = data.getGoods();
@@ -145,7 +162,7 @@ public class GoodsServiceImpl implements GoodsService {
     public BaseResultVo insertGoods(Data data) {
         BaseResultVo resultVo = new BaseResultVo();
         try {
-            int goodsSn=Integer.parseInt(data.getGoods().getGoodsSn());
+            int goodsSn = Integer.parseInt(data.getGoods().getGoodsSn());
             //通过goodsSn新增attribute表中的相关信息
             List<Attribute> attributes = data.getAttributes();
             for (Attribute attribute : attributes) {
@@ -156,7 +173,7 @@ public class GoodsServiceImpl implements GoodsService {
             int i = goodsMapper.selectIdByGoodsSn(goodsSn);
             if (i == 0) {
                 goodsMapper.insertGoodsByGoodsSn(goods);
-            }else {
+            } else {
                 resultVo.setErrno(500);
                 resultVo.setErrmsg("商品编号重复，请更换商品编号后继续添加");
                 return resultVo;
@@ -190,7 +207,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public BaseResultVo getGoodsCount() {
-        int total = goodsMapper.selectTotal(null,null);
+        int total = goodsMapper.selectTotal(null, null);
         BaseResultVo resultVo = new BaseResultVo();
         Data<Object> data = new Data<>();
         data.setGoodsCount(total);
@@ -198,6 +215,23 @@ public class GoodsServiceImpl implements GoodsService {
         resultVo.setErrmsg("成功");
         resultVo.setErrno(0);
         return resultVo;
+    }
+
+    @Override
+    public SingleQueryVo listGoods(int page, int size, int id) {
+        int count = goodsMapper.queryCountByBrandId(id);
+        int offset = (page - 1) * size;
+        Goods[] goodsList = goodsMapper.queryGoodsByBrandId(offset, size, id);
+
+        SingleQueryVo<WxGoodsQueryVo> singleQueryVo = new SingleQueryVo<>();
+        WxGoodsQueryVo wxGoodsQueryVo = new WxGoodsQueryVo();
+
+        wxGoodsQueryVo.setCount(count);
+        wxGoodsQueryVo.setGoodsList(goodsList);
+        singleQueryVo.setData(wxGoodsQueryVo);
+        singleQueryVo.setErrmsg("成功");
+        singleQueryVo.setErrno(0);
+        return singleQueryVo;
     }
 
 }

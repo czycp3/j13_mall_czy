@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author: zero
@@ -53,4 +54,40 @@ public interface GoodsMapper {
     void insertProductByGoodsSn(@Param("product")Product product, @Param("goodsSn")int goodsSn);
 
     int selectIdByGoodsSn(@Param("goodsSn")int goodsSn);
+
+    /**
+     * 查询热门商品
+     * @author CZY
+     * @return List<Goods>
+     */
+    List<Goods> queryHotGoods();
+
+    /**
+     * 按品牌查询商品数量
+     * @param id
+     * @return int
+     */
+    int queryCountByBrandId(int id);
+
+    /**
+     * 按品牌分页查询商品
+     * @param offset
+     * @param size
+     * @param id
+     * @return Goods[]
+     */
+    Goods[] queryGoodsByBrandId(@Param("offset") int offset, @Param("size") int size, @Param("id") int id);
+
+    /**
+     * 查询热门商品
+     * @author CZY
+     * @return List<Goods>
+     */
+    List<Goods> queryNewGoods();
+
+    void createAttributeByGoodsId(@Param("attribute") Attribute attribute, @Param("goodsId") int goodsId);
+
+    Set<Integer> selectIdListByGoodsId(@Param("goodsId") int goodsId);
+
+    void deleteAttributeById(@Param("id") int id);
 }

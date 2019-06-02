@@ -176,6 +176,19 @@
         </set>
             where id=#{attribute.id} and goods_id=#{goodsId}
     </update>
+    <insert id="createAttributeByGoodsId">
+        insert into cskaoyan_mall_goods_attribute
+        (id,goods_id,attribute,value,add_time,update_time,deleted)
+        values
+        (null,#{goodsId},#{attribute.attribute},#{attribute.value},now(),now(),0)
+    </insert>
+    <select id="selectIdListByGoodsId" resultType="int">
+        select id from cskaoyan_mall_goods_attribute where goods_id=#{goodsId}
+    </select>
+    <delete id="deleteAttributeById">
+        delete from cskaoyan_mall_goods_attribute where id=#{id}
+    </delete>
+
 
      <update id="updateGoodsByGoodsId">
         update cskaoyan_mall_goods
@@ -310,6 +323,44 @@
     <select id="selectIdByGoodsSn" resultType="int">
         select count(*) from cskaoyan_mall_goods where id=#{goodsSn}
     </select>
+
+    <!--查询热门商品-->
+    <resultMap id="goodsMap" type="com.cskaoyan.mall_springboot.bean.goods.Goods">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="brief" property="brief"/>
+        <result column="counter_price" property="counterPrice"/>
+        <result column="is_hot" property="isHot"/>
+        <result column="is_new" property="isNew"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="retail_price" property="retailPrice"/>
+    </resultMap>
+    <select id="queryHotGoods" resultMap="goodsMap">
+        select id,`name`,brief,counter_price,is_hot,is_new,pic_url,retail_price
+        from cskaoyan_mall_goods
+        where is_hot = 1
+    </select>
+
+    <!--按品牌查询商品-->
+    <select id="queryCountByBrandId" resultType="java.lang.Integer">
+        select count(*) from cskaoyan_mall_goods where brand_id = #{id}
+    </select>
+
+    <!--按品牌分页查询商品-->
+    <select id="queryGoodsByBrandId" resultMap="goodsMap">
+        select id,`name`,brief,counter_price,is_hot,is_new,pic_url,retail_price
+        from cskaoyan_mall_goods
+        where brand_id = #{id}
+        limit #{size} offset #{offset}
+    </select>
+
+    <!--查询热门商品-->
+    <select id="queryNewGoods" resultMap="goodsMap">
+        select id,`name`,brief,counter_price,is_hot,is_new,pic_url,retail_price
+        from cskaoyan_mall_goods
+        where is_new = 1
+    </select>
+
     <insert id="insertGoodsByGoodsSn">
         insert into cskaoyan_mall_goods
         (add_time,brand_id,brief,category_id,counter_price,deleted,goods_sn,is_hot,is_new,is_on_sale,keywords,name,

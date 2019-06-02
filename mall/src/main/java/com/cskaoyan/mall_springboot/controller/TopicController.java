@@ -2,6 +2,7 @@ package com.cskaoyan.mall_springboot.controller;
 
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.WxBaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.topic.Topic;
 import com.cskaoyan.mall_springboot.service.TopicService;
 import com.cskaoyan.mall_springboot.util.PageUtil;
@@ -46,5 +47,17 @@ public class TopicController {
     @ResponseBody
     public SingleQueryVo create(@RequestBody Topic topic) {
         return topicService.create(topic);
+    }
+
+    @RequestMapping("/topic/detail")
+    @ResponseBody
+    public SingleQueryVo detail(int id) {
+        return topicService.queryTopicById(id);
+    }
+
+    @RequestMapping("/topic/related")
+    @ResponseBody
+    public WxBaseQueryVo related() {
+        return topicService.queryAllTopic();
     }
 }

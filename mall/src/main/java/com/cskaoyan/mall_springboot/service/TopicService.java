@@ -2,6 +2,7 @@ package com.cskaoyan.mall_springboot.service;
 
 import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.WxBaseQueryVo;
 import com.cskaoyan.mall_springboot.bean.topic.Topic;
 import com.cskaoyan.mall_springboot.util.PageUtil;
 
@@ -37,4 +38,17 @@ public interface TopicService {
      * @return SingleQueryVo
      */
     SingleQueryVo create(Topic topic);
+
+    /**
+     * 根据Id查询Topic
+     * @param id
+     * @return SingleQueryVo
+     */
+    SingleQueryVo queryTopicById(int id);
+
+    /**
+     * 查询所有topic
+     * @return BaseQueryVo
+     */
+    WxBaseQueryVo queryAllTopic();
 }

@@ -1,8 +1,6 @@
 package com.cskaoyan.mall_springboot.service.impl;
 
-import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
-import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
-import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.*;
 import com.cskaoyan.mall_springboot.bean.topic.Topic;
 import com.cskaoyan.mall_springboot.mapper.TopicMapper;
 import com.cskaoyan.mall_springboot.service.TopicService;
@@ -127,5 +125,26 @@ public class TopicServiceImpl implements TopicService {
             throw new RuntimeException(e);
         }
         return singleQueryVo;
+    }
+
+    @Override
+    public SingleQueryVo queryTopicById(int id) {
+        SingleQueryVo<Topic> singleQueryVo = new SingleQueryVo<>();
+        Topic topic = topicMapper.selectByPrimaryKey(id);
+        singleQueryVo.setData(topic);
+        singleQueryVo.setErrmsg("成功");
+        singleQueryVo.setErrno(0);
+        return singleQueryVo;
+    }
+
+    @Override
+    public WxBaseQueryVo queryAllTopic() {
+        WxBaseQueryVo<Topic> wxBaseQueryVo = new WxBaseQueryVo<>();
+        List<Topic> topicList = topicMapper.queryAllTopic();
+        wxBaseQueryVo.setData(topicList);
+        wxBaseQueryVo.setErrmsg("成功");
+        wxBaseQueryVo.setErrno(0);
+
+        return wxBaseQueryVo;
     }
 }

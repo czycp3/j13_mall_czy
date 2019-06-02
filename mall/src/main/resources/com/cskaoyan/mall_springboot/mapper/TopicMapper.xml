@@ -133,4 +133,11 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <!--查询所有topic-->
+    <select id="queryAllTopic" resultMap="BaseResultMap">
+        select id,title,subtitle,price,read_count,pic_url
+        from cskaoyan_mall_topic
+        where deleted = 0
+    </select>
+
 </mapper>

@@ -2,9 +2,7 @@ package com.cskaoyan.mall_springboot.service.impl;
 
 import com.cskaoyan.mall_springboot.bean.mallmg.Brand;
 import com.cskaoyan.mall_springboot.bean.mallmg.MallPageHelper;
-import com.cskaoyan.mall_springboot.bean.resultvo.BaseQueryVo;
-import com.cskaoyan.mall_springboot.bean.resultvo.ResultVo;
-import com.cskaoyan.mall_springboot.bean.resultvo.SingleQueryVo;
+import com.cskaoyan.mall_springboot.bean.resultvo.*;
 import com.cskaoyan.mall_springboot.mapper.BrandMapper;
 import com.cskaoyan.mall_springboot.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +26,9 @@ public class BrandServiceImpl implements BrandService {
         ArrayList<Brand> brands = brandMapper.SelectBrandByPageIdName(mallPageHelper, offset);
         brandResultVo.setItems(brands);
         brandResultVo.setTotal(integer);
-        if (brands.size() > 0) {
-            brandBaseQueryVo.setErrmsg("成功");
-            brandBaseQueryVo.setErrno(0);
-            brandBaseQueryVo.setData(brandResultVo);
-        }
+        brandBaseQueryVo.setErrmsg("成功");
+        brandBaseQueryVo.setErrno(0);
+        brandBaseQueryVo.setData(brandResultVo);
         return brandBaseQueryVo;
     }
 
@@ -47,11 +43,9 @@ public class BrandServiceImpl implements BrandService {
         brand.setSortOrder(sortOrder);
         int i = brandMapper.InsertBrand(brand);
         Brand brand1 = brandMapper.SelectBrandByPicUrl(brand.getPicUrl());
-        if (i > 0) {
-            brandSingleQueryVo.setData(brand1);
-            brandSingleQueryVo.setErrno(0);
-            brandSingleQueryVo.setErrmsg("成功");
-        }
+        brandSingleQueryVo.setData(brand1);
+        brandSingleQueryVo.setErrno(0);
+        brandSingleQueryVo.setErrmsg("成功");
         return brandSingleQueryVo;
     }
 
@@ -78,6 +72,18 @@ public class BrandServiceImpl implements BrandService {
             brandSingleQueryVo.setErrmsg("成功");
         }
         return brandSingleQueryVo;
+    }
+
+    @Override
+    public WxQueryVo queryBrandDetailById(int id) {
+        WxQueryVo wxQueryVo = new WxQueryVo();
+        WxResultVo wxResultVo = new WxResultVo();
+        Brand brand = brandMapper.queryBrandDetailById(id);
+        wxResultVo.setBrand(brand);
+        wxQueryVo.setData(wxResultVo);
+        wxQueryVo.setErrmsg("成功");
+        wxQueryVo.setErrno(0);
+        return wxQueryVo;
     }
 
     public SingleQueryVo<Brand> BrandMatch(Brand brand) {
