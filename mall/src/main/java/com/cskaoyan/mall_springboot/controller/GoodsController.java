@@ -61,10 +61,15 @@ public class GoodsController {
         return goodsService.insertGoods(data);
     }
 
-//    @RequestMapping("/goods/list")
-//    @ResponseBody
-//    public SingleQueryVo listGoods(int page,int size,int brandId){
-//        return goodsService.listGoods(page,size,brandId);
-//    }
+    @RequestMapping("/wx/goods/count")
+    @ResponseBody
+    public BaseResultVo getGoodsCount(){
+        return goodsService.getGoodsCount();
+    }
 
+    @RequestMapping("wx/goods/list")
+    @ResponseBody
+    public SingleQueryVo listGoods(int page,int size,int brandId){
+        return goodsService.listGoods(page,size,brandId);
+    }
 }

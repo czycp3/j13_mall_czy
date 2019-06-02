@@ -28,6 +28,9 @@ public interface GoodsService {
 
     BaseResultVo insertGoods(Data data);
 
+
+    BaseResultVo getGoodsCount();
+
     /**
      * 按品牌分页查询商品列表
      * @param page
@@ -36,4 +39,5 @@ public interface GoodsService {
      * @return SingleQueryVo
      */
     SingleQueryVo listGoods(int page, int size, int id);
+
 }

@@ -22,7 +22,7 @@
         <where>
             <if test="mallPageHelper.id!=null">
                 <if test="mallPageHelper.id!=''">
-                    id=#{mallPageHelper.id}
+                    id like concat('%',#{mallPageHelper.id},'%')
                 </if>
             </if>
             <if test="mallPageHelper.name!=null">
@@ -39,7 +39,7 @@
         <where>
             <if test="mallPageHelper.id!=null">
                 <if test="mallPageHelper.id!=''">
-                  id=#{mallPageHelper.id}
+                    id like concat('%',#{mallPageHelper.id},'%')
                 </if>
             </if>
             <if test="mallPageHelper.name!=null">

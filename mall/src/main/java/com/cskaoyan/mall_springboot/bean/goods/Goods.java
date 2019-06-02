@@ -129,13 +129,7 @@ public class Goods {
         this.counterPrice = counterPrice;
     }
 
-    public Boolean getDeleted() {
-        return deleted;
-    }
 
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
 
     public String getGoodsSn() {
         return goodsSn;
@@ -153,28 +147,36 @@ public class Goods {
         this.id = id;
     }
 
-    public Boolean getHot() {
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean isdeleted) {
+        this.deleted = deleted;
+    }
+
+    public Boolean getIsHot() {
         return isHot;
     }
 
-    public void setHot(Boolean hot) {
-        isHot = hot;
+    public void setIsHot(Boolean ishot) {
+        isHot = ishot;
     }
 
-    public Boolean getNew() {
+    public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setNew(Boolean aNew) {
-        isNew = aNew;
+    public void setIsNew(Boolean isNew) {
+        this.isNew = isNew;
     }
 
-    public Boolean getOnSale() {
+    public Boolean getIsOnSale() {
         return isOnSale;
     }
 
-    public void setOnSale(Boolean onSale) {
-        isOnSale = onSale;
+    public void setIsOnSale(Boolean isonSale) {
+        isOnSale = isonSale;
     }
 
     public String getKeywords() {

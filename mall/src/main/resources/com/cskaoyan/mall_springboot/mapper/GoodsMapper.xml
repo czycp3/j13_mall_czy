@@ -176,6 +176,19 @@
         </set>
             where id=#{attribute.id} and goods_id=#{goodsId}
     </update>
+    <insert id="createAttributeByGoodsId">
+        insert into cskaoyan_mall_goods_attribute
+        (id,goods_id,attribute,value,add_time,update_time,deleted)
+        values
+        (null,#{goodsId},#{attribute.attribute},#{attribute.value},now(),now(),0)
+    </insert>
+    <select id="selectIdListByGoodsId" resultType="int">
+        select id from cskaoyan_mall_goods_attribute where goods_id=#{goodsId}
+    </select>
+    <delete id="deleteAttributeById">
+        delete from cskaoyan_mall_goods_attribute where id=#{id}
+    </delete>
+
 
      <update id="updateGoodsByGoodsId">
         update cskaoyan_mall_goods

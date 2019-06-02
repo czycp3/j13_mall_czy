@@ -25,5 +25,9 @@ public interface CategoryMapper {
 
     int DeleteCategoryByPid(@Param("pid") Integer pid);
 
+    List<Category> getCategoryListByPid(@Param("pid") int i);
+
+    Category selectCategoryById(@Param("id") int id);
+
     List<FloorGoodsList> queryCategory();
 }

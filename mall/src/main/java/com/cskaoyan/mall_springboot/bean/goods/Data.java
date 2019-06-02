@@ -24,7 +24,7 @@ public class Data<T> {
     List<Category> categoryList;
     int[] categoryIds;
     int total;
-
+    int goodsCount;
 
     @Override
     public String toString() {
@@ -38,8 +38,41 @@ public class Data<T> {
                 ", categoryList=" + categoryList +
                 ", categoryIds=" + Arrays.toString(categoryIds) +
                 ", total=" + total +
+                ", goodsCount=" + goodsCount +
+                ", currentCatagory=" + currentCatagory +
+                ", currentSubCategory=" + currentSubCategory +
                 '}';
     }
+
+    public int getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(int goodsCount) {
+        this.goodsCount = goodsCount;
+    }
+
+    Category currentCatagory;
+    List<Category> currentSubCategory;
+
+    public Category getCurrentCatagory() {
+        return currentCatagory;
+    }
+
+    public void setCurrentCatagory(Category currentCatagory) {
+        this.currentCatagory = currentCatagory;
+    }
+
+    public List<Category> getCurrentSubCategory() {
+        return currentSubCategory;
+    }
+
+    public void setCurrentSubCategory(List<Category> currentSubCategory) {
+        this.currentSubCategory = currentSubCategory;
+    }
+
+
+
 
     public List<Brand> getBrandList() {
         return brandList;

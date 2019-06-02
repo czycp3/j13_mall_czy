@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author: zero
@@ -83,4 +84,10 @@ public interface GoodsMapper {
      * @return List<Goods>
      */
     List<Goods> queryNewGoods();
+
+    void createAttributeByGoodsId(@Param("attribute") Attribute attribute, @Param("goodsId") int goodsId);
+
+    Set<Integer> selectIdListByGoodsId(@Param("goodsId") int goodsId);
+
+    void deleteAttributeById(@Param("id") int id);
 }

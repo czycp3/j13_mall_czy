@@ -6,8 +6,8 @@ package com.cskaoyan.mall_springboot.bean.goods;
  * @Version 1.0
  */
 public class Attribute {
-    int id;
-    int goodsId;
+    Integer id;
+    Integer goodsId;
     String attribute;
     String value;
     String addTime;
@@ -27,19 +27,19 @@ public class Attribute {
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
 

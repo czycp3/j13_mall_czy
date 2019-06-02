@@ -36,11 +36,6 @@ public class KeywordServiceImpl implements KeywordService {
     @Override
     public SingleQueryVo<Keyword> InsertKeyword(Keyword keyword) {
         SingleQueryVo<Keyword> keywordSingleQueryVo = new SingleQueryVo<>();
-        if (keyword.getUrl()==null||keyword.getUrl().equals("")){
-            keywordSingleQueryVo.setErrno(401);
-            keywordSingleQueryVo.setErrmsg("参数不对");
-            return keywordSingleQueryVo;
-        }
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = simpleDateFormat.format(date);
@@ -56,11 +51,6 @@ public class KeywordServiceImpl implements KeywordService {
     @Override
     public SingleQueryVo<Keyword> UpdateKeyword(Keyword keyword) {
         SingleQueryVo<Keyword> keywordSingleQueryVo = new SingleQueryVo<>();
-        if (keyword.getUrl()==null||keyword.getUrl().equals("")){
-            keywordSingleQueryVo.setErrno(401);
-            keywordSingleQueryVo.setErrmsg("参数不对");
-            return keywordSingleQueryVo;
-        }
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = simpleDateFormat.format(date);
