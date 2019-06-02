@@ -27,7 +27,7 @@ public class MainController {
         return mainService.queryStatics();
     }
 
-    @RequestMapping("/home/index")
+    @RequestMapping("wx/home/index")
     @ResponseBody
     public WxQueryVo index(){
         return mainService.queryMainInfo();

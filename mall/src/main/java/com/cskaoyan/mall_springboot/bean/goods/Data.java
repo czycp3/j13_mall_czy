@@ -39,7 +39,7 @@ public class Data<T> {
                 ", categoryIds=" + Arrays.toString(categoryIds) +
                 ", total=" + total +
                 ", goodsCount=" + goodsCount +
-                ", currentCatagory=" + currentCatagory +
+                ", currentCategory=" + currentCategory +
                 ", currentSubCategory=" + currentSubCategory +
                 '}';
     }
@@ -52,15 +52,15 @@ public class Data<T> {
         this.goodsCount = goodsCount;
     }
 
-    Category currentCatagory;
+    Category currentCategory;
     List<Category> currentSubCategory;
 
-    public Category getCurrentCatagory() {
-        return currentCatagory;
+    public Category getCurrentCategory() {
+        return currentCategory;
     }
 
-    public void setCurrentCatagory(Category currentCatagory) {
-        this.currentCatagory = currentCatagory;
+    public void setCurrentCategory(Category currentCategory) {
+        this.currentCategory = currentCategory;
     }
 
     public List<Category> getCurrentSubCategory() {

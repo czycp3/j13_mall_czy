@@ -27,27 +27,27 @@ public class CatelogServiceImpl implements CatelogService {
         List<Category> categoryList = categoryMapper.getCategoryListByPid(pid);
         //获得默认首页的居家分类信息
         int id = 1005000;
-        Category currentCatagory = categoryMapper.selectCategoryById(id);
+        Category currentCategory = categoryMapper.selectCategoryById(id);
         //获得居家下的二级目录分类信息
         List<Category> currentSubCategory = categoryMapper.getCategoryListByPid(id);
-        return packaging(categoryList,currentCatagory,currentSubCategory);
+        return packaging(categoryList,currentCategory,currentSubCategory);
     }
 
     @Override
-    public BaseResultVo getCurrentCatalogById(Object id) {
-        Category currentCatagory= categoryMapper.selectCategoryById((int)id);
-        List<Category> currentSubCategory = categoryMapper.getCategoryListByPid((int)id);
-        return packaging(null,currentCatagory,currentSubCategory);
+    public BaseResultVo getCurrentCatelogById(String id) {
+        Category currentCategory= categoryMapper.selectCategoryById(Integer.parseInt(id));
+        List<Category> currentSubCategory = categoryMapper.getCategoryListByPid(Integer.parseInt(id));
+        return packaging(null,currentCategory,currentSubCategory);
     }
 
-    private BaseResultVo packaging(List categoryList,Category currentCatagory,List currentSubCategory){
+    private BaseResultVo packaging(List categoryList,Category currentCategory,List currentSubCategory){
         BaseResultVo baseResultVo = new BaseResultVo();
         Data<Object> data = new Data<>();
         if(categoryList!=null){
             data.setCategoryList(categoryList);
         }
-        if(currentCatagory!=null){
-            data.setCurrentCatagory(currentCatagory);
+        if(currentCategory!=null){
+            data.setCurrentCategory(currentCategory);
         }
         if(currentSubCategory!=null){
             data.setCurrentSubCategory(currentSubCategory);

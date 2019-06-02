@@ -27,7 +27,7 @@ public class CatalogController {
 
     @RequestMapping("catalog/current")
     @ResponseBody
-    public BaseResultVo getCurrentCatalogById(Object id){
-        return catelogService.getCurrentCatalogById(id);
+    public BaseResultVo getCurrentCatelogById(String id){
+        return catelogService.getCurrentCatelogById(id);
     }
 }

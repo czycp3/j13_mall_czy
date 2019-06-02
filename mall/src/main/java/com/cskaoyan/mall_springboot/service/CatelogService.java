@@ -10,5 +10,5 @@ import com.cskaoyan.mall_springboot.bean.goods.BaseResultVo;
 public interface CatelogService {
     BaseResultVo getCatalogIndex();
 
-    BaseResultVo getCurrentCatalogById(Object id);
+    BaseResultVo getCurrentCatelogById(String id);
 }

@@ -72,4 +72,6 @@ public class GoodsController {
     public SingleQueryVo listGoods(int page,int size,int brandId){
         return goodsService.listGoods(page,size,brandId);
     }
+
+
 }
