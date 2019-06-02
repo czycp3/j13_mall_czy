@@ -113,10 +113,9 @@ public class CouponServiceImpl implements CouponService {
         try {
             int ret = couponMapper.insertSelective(coupon);
             if(ret == 1) {
-                Coupon coupon1 = couponMapper.selectByPrimaryKey(coupon.getId());
                 singleQueryVo.setErrmsg("成功");
                 singleQueryVo.setErrno(0);
-                singleQueryVo.setData(coupon1);
+                singleQueryVo.setData(coupon);
             }
         }catch (Exception e){
             singleQueryVo.setErrmsg("增加失败");

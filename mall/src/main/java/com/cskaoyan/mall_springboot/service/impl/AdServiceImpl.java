@@ -123,10 +123,9 @@ public class AdServiceImpl implements AdService {
         try {
             int ret = adMapper.insertSelective(ad);
             if(ret == 1) {
-                Ad ad1 = adMapper.selectByPrimaryKey(ad.getId());
                 singleQueryVo.setErrmsg("成功");
                 singleQueryVo.setErrno(0);
-                singleQueryVo.setData(ad1);
+                singleQueryVo.setData(ad);
             }
         }catch (Exception e){
             singleQueryVo.setErrmsg("增加失败");
